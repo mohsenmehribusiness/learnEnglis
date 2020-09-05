@@ -138,7 +138,13 @@ return [
 
         /*
          * Laravel Framework Service Providers...
+         *
+         *
          */
+        /* me */
+        Ybazli\Faker\FakerServiceProvider::class,
+        /* me */
+
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -189,7 +195,9 @@ return [
     */
 
     'aliases' => [
-
+        /*me*/
+        'Faker' => Ybazli\Faker\Facades\Faker::class,
+        /*me*/
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

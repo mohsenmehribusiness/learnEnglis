@@ -8,3 +8,7 @@
 <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="{{ url('css/pricing.css') }}" rel="stylesheet">
+<link href="{{ url('css/cursor.css') }}" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="{{ url('font-awesome/css/font-awesome.css') }}">
+<!-- Font Awesome Icons -->

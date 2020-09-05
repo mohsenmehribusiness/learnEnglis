@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Traits\ResponseAjax;
 use App\Word;
 use Illuminate\Http\Request;
 use SweetAlert;
 
 class WordController extends Controller
 {
+    use ResponseAjax;
     public function index(){
         return view('index');
     }
@@ -35,7 +37,7 @@ class WordController extends Controller
     }
 
     public function study(){
-        $words=Word::all();
-        return view('studyWords');
+        $words=Word::paginate(20);
+        return view('studyWords',compact('words'));
     }
 }

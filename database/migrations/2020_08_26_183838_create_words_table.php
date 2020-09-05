@@ -15,14 +15,14 @@ class CreateWordsTable extends Migration
     {
         Schema::create('words', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('english');
-            $table->string('persian');
-            $table->string('sentence')->nullable();
-            $table->string('tag')->nullable();
-            $table->string('lesson')->nullable();
-            $table->boolean('state')->default(false);
-            $table->integer('star')->default(0);
+            $table->string('english');// کلمه اصلی
+            $table->string('persian');// معنی کلمه
+            $table->string('sentence')->nullable();//جملاتی که توش به کار میره یک کلمه
+            $table->string('tag')->nullable();//برچسب برای پیدا کردن
+            $table->string('lesson')->nullable();//تقسیم بندی کلمات بر اساس درس
+            $table->boolean('state')->default(false);// یاد گرفتم - یاد نگرفتم
+            $table->float('star')->default(0);//تقسیم بندی بر اساس ستاره
+            $table->integer('repeat')->default(0);// تعداد تکرار برای یاد گیری
         });
     }
         /**

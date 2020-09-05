@@ -9,6 +9,11 @@ use SweetAlert;
 class WordController extends Controller
 {
     use ResponseAjax;
+
+    public function translateGet(){
+        return view('translate');
+    }
+
     public function index(){
         return view('index');
     }

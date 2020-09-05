@@ -21,6 +21,9 @@
             <a class="nav-link" href="{{ route('study') }}">Study</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('translate') }}">Translate</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('insert.word') }}">InsertWord</a>
         </li>
         <li class="nav-item">

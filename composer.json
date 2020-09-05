@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
+        "stichoza/google-translate-php": "^4.1",
         "uxweb/sweet-alert": "^2.0",
         "ybazli/faker": "^1.0"
     },

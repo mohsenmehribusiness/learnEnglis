@@ -10,13 +10,14 @@
             </div>
             <div class="col">
                 <div class="form-check">
-
+                    <input class="form-check-input position-static" type="checkbox" name="tableHover" id="tableHover" >
+                    <label for="tableHover" class="label">table hover</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" name="tableHover" id="tableHover" >
-                    <label for="tableHover" class="label">table hover</label>
+                    <input class="form-check-input position-static" type="checkbox" name="tableHoverPersian" id="tableHoverPersian" >
+                    <label for="tableHoverPersian" class="label">table hover persian</label>
                 </div>
             </div>
         </div>
@@ -50,15 +51,17 @@
                     <td class="text-center">
                         {{ $word->english }}
                     </td>
-                    <td>
-                       @foreach($word->persian as $persian)
+                    <td class="persian-td">
                         <span class="persian">
+                       @foreach($word->persian as $persian)
+                        <span>
                             {{ $persian }}
                             @if(!$loop->last)
                                 ,
                             @endif
                         </span>
                         @endforeach
+                        </span>
                     </td>
                     <td class="settingtd text-center" style="visibility:hidden;">
                         <a  onclick="checkstate({{ $word->id }})" class="px-1 cursor_pointer " >
@@ -96,114 +99,10 @@
 
 @section('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-        .colorstate{
-            color:red;
-        }
-        label {
-            cursor: pointer;
-        }
-        .hide{
-            visibility:hidden !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url('css/study.css') }}">
 @endsection
 
 @section('script')
-    <style>
-        .show{
-            visibility: visible !important;
-        }
-    </style>
     <script src = "{{ url('js/jqueryAjax.min.js') }}"></script>
-    <script>
-        let settingHead=$('#settingth');
-        settingHead.mouseenter(function (){
-            $(this).css('opacity','1');
-        });
-        settingHead.mouseleave(function () {
-            $(this).css('opacity','0.1');
-            if($(this).is( ":checked")){
-                $(this).css('opacity','1');
-            }
-        });
-        settingHead.change(function(){
-            $(this).css('opacity','0.1');
-            if($(this).is( ":checked")){
-                $(this).css('opacity','1');
-            }
-        });
-        checkstate=function(id){
-            $.ajax(
-                {
-                    url:"{{ route('checkstate') }}",
-                    method:"POSt",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data:{id:id},
-                    dataType:"json",
-                    success:function(data)
-                    {
-                        let ico=$('#state_'+id);
-                        if(data.state){
-                            ico.addClass('text-success fa-check');
-                            ico.removeClass('text-danger fa-times');
-                        }
-                        else
-                        {
-                            ico.removeClass('text-success fa-check');
-                            ico.addClass('text-danger fa-times');
-                        }
-                    }
-                });
-        };
-        getInformationWord=function(id){
-            $.ajax(
-                {
-                    url:"{{ route('get.information.word') }}",
-                    method:"POSt",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data:{id:id},
-                    dataType:"json",
-                    success:function(data)
-                    {
-                        let english=data.word['english'];
-                        let persian=data.word['persian'];
-                        let sentences=data.word['sentence'];
-                        $('#english_text_modal').text(english);
-                        $('#persian_text_modal').text(persian);
-                        $('#sentences_text_modal').text(null);
-                        for (i = 0; i < sentences.length; i++){
-                            $('#sentences_text_modal').append("<li class='text-muted'>"+sentences[i]+"</li>");
-                        }
-                    }
-                });
-        }
-        $(document).ready(function () {
-            //table border
-            $("#tableBorder").change(function() {
-                $('#studyTable').toggleClass('table-bordered');
-            });
-
-            //table hover
-            $("#tableHover").change(function() {
-                $('#studyTable').toggleClass('table-hover');
-            });
-
-            //visible/hidden persiansWord
-            $("#visiblePersian").change(function() {
-                $('.persian').each(function(){
-                    $(this).toggleClass('hide');
-                });
-            });
-            $("#settingth").change(function() {
-                $('.settingtd').each(function(){
-                    $(this).toggleClass('show');
-                });
-            });
-        });
-    </script>
+    <script src = "{{ url('js/study.js') }}"></script>
 @endsection

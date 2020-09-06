@@ -1,0 +1,12 @@
+.colorstate{
+    color:red;
+}
+label {
+    cursor: pointer;
+}
+.hide{
+    visibility:hidden !important;
+}
+.show{
+    visibility: visible !important;
+}

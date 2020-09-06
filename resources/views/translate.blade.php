@@ -24,6 +24,13 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-6">
+                <span class="text-muted">
+                    press enter for translate
+                </span>
+        </div>
+    </div>
 @endsection
 
 @section('script')

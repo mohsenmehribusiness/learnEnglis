@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
                 'english'=>$faker->word,
                 'persian'=>[PFaker::word(),PFaker::word(),PFaker::word()],
                 'sentence'=>[$faker->sentence,$faker->sentence],
+                'state'=>rand(0,1),
                 'lesson'=>array_rand(['1000 words','3000 words','504 words'])
                 ]
             );

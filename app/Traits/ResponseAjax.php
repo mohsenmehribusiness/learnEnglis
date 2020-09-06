@@ -28,12 +28,10 @@ trait ResponseAjax
         $word->update([
             'state'=>!$word->state
         ]);
-
         return response()->json(array('state'=> $word->state), 200);
     }
 
     public function getInformationWord(Request $request){
-
         $word=Word::find($request->id);
         return response()->json(array('word'=> $word), 200);
     }

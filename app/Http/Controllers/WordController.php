@@ -42,7 +42,7 @@ class WordController extends Controller
     }
 
     public function study(){
-        $words=Word::paginate(20);
+        $words=Word::select('english','id','persian','state')->paginate(20);
         return view('studyWords',compact('words'));
     }
 }

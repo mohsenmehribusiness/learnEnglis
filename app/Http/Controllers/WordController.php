@@ -23,19 +23,31 @@ class WordController extends Controller
     }
 
     public function InsertWordPost(Request $request){
+        //return $request->all();
+
+        // variables...
         $inputs=$request->except('_token');
         $sentences=explode('-',$inputs['sentence']);
         $persians=explode('-',$inputs['persian']);
         $tags=explode('-',$inputs['tag']);
-        $word=Word::create(
-            [
-                'english'=>$inputs['english'],
-                'persian'=>$persians,
-                'sentence'=>$sentences,
-                'tag'=>$tags,
-                'lesson'=>$inputs['lesson']]
-        );
-        $title=$inputs['english'];
+        $lesson=$inputs['lesson'];
+        $english=$inputs['english'];
+
+        //save words...
+        $word=Word::create(['english'=>$english]);
+
+        //save relations one to one...
+        $word->Lesson()->create(['lesson'=>$lesson]);
+        $word->Detail()->create();
+        //save relations one many
+        foreach ($persians as $persian)
+            $word->Persians()->create(['persian'=>$persian]);
+        foreach ($tags as $tag)
+            $word->Tags()->create(['tag'=>$tag]);
+        foreach ($sentences as $sentence)
+            $word->Sentences()->create(['sentence'=>$sentence]);
+        //messages...
+        $title=$english;
         $message='word  '.$inputs['english'].'  saved ...';
         alert()->success($message, $title);
         return back();

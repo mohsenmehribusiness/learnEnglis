@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Word extends Model
+class sentence extends Model
 {
-    protected $fillable = ['english'];
-   // protected $casts=['persian'=>'array','sentence'=>'array','tag'=>'array'];
+    protected $fillable=['sentence','usage','foreign_id'];
     public $timestamps=false;
+
 
     public function Lesson()
     {

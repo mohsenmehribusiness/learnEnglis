@@ -57,6 +57,7 @@
             <br>
             <form class="needs-validation" action="{{ route('insert.word')}}" method="POST" novalidate>
                 @csrf
+                <input type="text" name="type" value="word" hidden class="hide">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <input type="text" class="form-control" id="english" name="english" placeholder="english" value="" required>

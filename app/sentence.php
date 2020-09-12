@@ -9,10 +9,9 @@ class sentence extends Model
     protected $fillable=['sentence','usage','foreign_id'];
     public $timestamps=false;
 
-
-    public function Lesson()
+    public function Lessons()
     {
-        return $this->hasOne(Lesson::class,'foreign_id');
+        return $this->belongsToMany(Lesson::class);
     }
 
     public function Tags()
@@ -28,10 +27,5 @@ class sentence extends Model
     public function Detail()
     {
         return $this->hasOne(Detail::class, 'foreign_id');
-    }
-
-    public function Sentences()
-    {
-        return $this->hasMany(sentence::class,'foreign_id');
     }
 }

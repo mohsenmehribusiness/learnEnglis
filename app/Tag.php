@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $fillable=['tags','foreign_id'];
+    protected $fillable=['tag','foreign_id'];
     protected $casts=['tags'=>'array'];
     public $timestamps=false;
 

@@ -16,7 +16,7 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('foreign_id');
-            $table->string('tags')->nullable();//برچسب برای پیدا کردن
+            $table->string('tag');
         });
     }
 

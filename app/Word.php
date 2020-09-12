@@ -1,7 +1,5 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Word extends Model
@@ -10,9 +8,9 @@ class Word extends Model
    // protected $casts=['persian'=>'array','sentence'=>'array','tag'=>'array'];
     public $timestamps=false;
 
-    public function Lesson()
+    public function Lessons()
     {
-        return $this->hasOne(Lesson::class,'foreign_id');
+        return $this->belongsToMany(Lesson::class);
     }
 
     public function Tags()

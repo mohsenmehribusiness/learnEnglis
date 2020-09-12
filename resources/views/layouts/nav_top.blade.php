@@ -24,7 +24,7 @@
             <a class="nav-link" href="{{ route('translate') }}">Translate</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('insert.word') }}">InsertWord</a>
+            <a class="nav-link" href="{{ route('insert') }}">Insert</a>
         </li>
         <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>

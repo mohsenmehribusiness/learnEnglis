@@ -2,6 +2,10 @@
 
 namespace App\Traits;
 use App\Detail;
+use App\Http\Requests\LessonRequest;
+use App\Http\Requests\SentenceRequest;
+use App\Http\Requests\WordRequest;
+use App\Lesson;
 use App\sentence;
 use App\Tag;
 use App\Word;
@@ -9,17 +13,15 @@ use Illuminate\Http\Request;
 
 trait Insert
 {
+    use PrivateFunctionInsert;
 
-    public function InsertLesson(Request $request){
-        return $request;
-    }
-    private function getDetails(){
-        $details=array();
-        $details['wordCount']=Word::all()->count();
-        $details['sentenceCount']=sentence::all()->count();
-        $details['tags']=Tag::all()->count();
-        $details['repeat']=Detail::select('repeat')->sum('repeat');
-        return $details;
+    public function InsertLesson(LessonRequest $request){
+        Lesson::create([
+            'lesson'=>$request->lesson,
+            'description'=>$request->description
+        ]);
+        alert()->success('saved lesson',$request->lesson);
+        return redirect()->route('insert');
     }
 
     public function insert(){
@@ -27,30 +29,34 @@ trait Insert
         return view('insert.insert',compact('details'));
     }
 
-    public function insertWord(Request $request){
-        //return $request->all();
-
-        // variables...
+    public function insertWord(WordRequest $request){
+        $this->usage='word';
         $inputs=$request->except('_token');
-        $sentences=explode('-',$inputs['sentence']);
-        $persians=explode('-',$inputs['persian']);
-        $tags=explode('-',$inputs['tag']);
-        $lesson=$inputs['lesson'];
-        $english=$inputs['english'];
+        $persians=$this->explodeArray($inputs['persian']);
 
-        //save words...
+        //save english word
+        $english=$inputs['english'];
         $word=Word::create(['english'=>$english]);
 
-        //save relations one to one...
-        $word->Lesson()->create(['lesson'=>$lesson]);
-        $word->Detail()->create();
-        //save relations one many
-        foreach ($persians as $persian)
-            $word->Persians()->create(['persian'=>$persian]);
-        foreach ($tags as $tag)
-            $word->Tags()->create(['tag'=>$tag]);
-        foreach ($sentences as $sentence)
-            $word->Sentences()->create(['sentence'=>$sentence]);
+       //save details
+        $word->Detail()->create(['usage'=>$this->usage]);
+
+        //save relations one many [persians , tags , sentences]
+        $this->SaveOneToMany($word,$persians,'Persians','persian');
+        if(!is_null($inputs['tag'])){
+            $tags=$this->explodeArray($inputs['tag']);
+            $this->SaveOneToMany($word,$tags,'Tags','tag');
+        }
+        if(!is_null($inputs['sentence'])){
+            $sentences=$this->explodeArray($inputs['sentence']);
+            $this->SaveOneToMany($word, $sentences, 'Sentences', 'sentence');
+        }
+        //save lessons
+        if(isset($inputs['lesson'])) {
+            $lessons = $inputs['lesson'];
+            $word->Lessons()->sync($lessons);
+        }
+
         //messages...
         $title=$english;
         $message='word  '.$inputs['english'].'  saved ...';
@@ -58,26 +64,32 @@ trait Insert
         return back();
     }
 
-    public function insertSentence(Request $request){
-        // variables...
+    public function insertSentence(SentenceRequest $request){
+        $this->usage='sentence';
         $inputs=$request->except('_token');
-        $sent=$inputs['sentence'];
-        $persian=$inputs['persian'];
-        $tags=explode('-',$inputs['tag']);
-        $lesson=$inputs['lesson'];
-        //save relations one to on`e...
-        $sentence=sentence::create(['sentence'=>$sent]);
-        $sentence->Lesson()->create(['lesson'=>$lesson]);
-        $sentence->Persians()->create(['persian'=>$persian]);
-        $sentence->Detail()->create();
-        //save relations one many
-        foreach ($tags as $tag)
-            $sentence->Tags()->create(['tag'=>$tag]);
+        $persians=$this->explodeArray($inputs['persian']);
+        //save english word
+        $sentence=sentence::create(['sentence'=>$inputs['sentence'],'usage'=>$this->usage]);
+
+        //save details
+        $sentence->Detail()->create(['usage'=>$this->usage]);
+
+        //save relations one many [persians , tags , sentences]
+        $this->SaveOneToMany($sentence,$persians,'Persians','persian');
+        if(!is_null($inputs['tag'])){
+            $tags=$this->explodeArray($inputs['tag']);
+            $this->SaveOneToMany($sentence,$tags,'Tags','tag');
+        }
+        //save lessons
+        if(isset($inputs['lesson'])) {
+            $lessons = $inputs['lesson'];
+            $sentence->Lessons()->sync($lessons);
+        }
+
         //messages...
-        $title=$english;
-        $message='word  '.$inputs['english'].'  saved ...';
-        alert()->success($message, $title);
-        return back();
+        alert()->success($inputs['sentence'],'saved');
+        return redirect()->route('insert');
     }
+
 
 }

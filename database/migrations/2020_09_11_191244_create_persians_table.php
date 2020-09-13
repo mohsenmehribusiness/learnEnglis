@@ -15,6 +15,7 @@ class CreatePersiansTable extends Migration
     {
         Schema::create('persians', function (Blueprint $table) {
             $table->id();
+            $table->string('usage');
             $table->bigInteger('foreign_id');
             $table->text('persian');
         });

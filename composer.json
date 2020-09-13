@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.0",
         "stichoza/google-translate-php": "^4.1",
         "uxweb/sweet-alert": "^2.0",
-        "ybazli/faker": "^1.0"
+        "ybazli/faker": "^1.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

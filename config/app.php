@@ -143,6 +143,7 @@ return [
          */
         /* me */
         Ybazli\Faker\FakerServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class,
         /* me */
 
         Illuminate\Auth\AuthServiceProvider::class,

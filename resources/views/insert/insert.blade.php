@@ -16,86 +16,31 @@
             </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="word_nav" role="tabpanel" aria-labelledby="home-tab">
-                        <form class="needs-validation pt-5 pb-5" action="{{ route('insert.word')}}" method="POST" novalidate>
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control" id="english" name="english" placeholder="english" value="" required>
-                                    <div class="invalid-feedback">
-                                        لطفا نام را وارد کنید.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="persian" name="persian" placeholder="persian words..." required>
-                                <div class="invalid-feedback">
-                                    لطفا آدرس خود را وارد کنید
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="tag" name="tag" placeholder="tags..." required>
-                                <div class="invalid-feedback">
-                                    لطفا آدرس خود را وارد کنید
-                                </div>
-                            </div>
-                            <!-- more .. -->
-                            <div id="demo" class="collapse">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="lesson" name="lesson" placeholder="lesson" required>
-                                    <div class="invalid-feedback">
-                                        لطفا آدرس خود را وارد کنید
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" name="sentence" id="sentence" placeholder="sentence" required>
-                                    <div class="invalid-feedback">
-                                        لطفا آدرس خود را وارد کنید
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#demo" data-toggle="collapse" class="link float-right">more</a>
-                            <br>
-                            <hr class="mb-4">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Insert</button>
-                        </form>
+                        @include('insert.WordForm')
                     </div>
                     <div class="tab-pane fade" id="sentence_nav" role="tabpanel" aria-labelledby="profile-tab">
-                        <form class="needs-validation pt-5 pb-5" action="{{ route('insert.sentence')}}" method="POST" novalidate>
-                            @csrf
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="tag" name="sentence" placeholder="insert sentence..." required>
-                                <div class="invalid-feedback">
-                                    لطفا آدرس خود را وارد کنید
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="persian" name="persian" placeholder="persian..." required>
-                                <div class="invalid-feedback">
-                                    لطفا آدرس خود را وارد کنید
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="tag" name="tag" placeholder="tags..." required>
-                                <div class="invalid-feedback">
-                                    لطفا آدرس خود را وارد کنید
-                                </div>
-                            </div>
-                            <!-- more .. -->
-                            <div id="demo" class="collapse">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="lesson" name="lesson" placeholder="lesson" required>
-                                    <div class="invalid-feedback">
-                                        لطفا آدرس خود را وارد کنید
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#demo" data-toggle="collapse" class="link float-right">more</a>
-                            <br>
-                            <hr class="mb-4">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Insert</button>
-                        </form>
+                        @include('insert.SentenceForm')
                     </div>
                 </div>
             </div>
     </div>
+    @include('insert.modalLessonForm')
+@endsection
+
+@section('script')
+<!-- Latest compiled and minified JavaScript -->
+<script src="{{ url('js/bootstrap-select.min.js') }}"></script>
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
+<script>
+@error('lesson')
+    $('#insert_lesson_modal').modal('show');
+@enderror
+</script>
+@endsection
+
+@section('css')
+    <!-- bootstrap-multiSelect -->
+    <link rel="stylesheet" href="{{ url('css/bootstrap-select.min.css') }}">
+    <!-- bootstrap-multiSelect -->
 @endsection

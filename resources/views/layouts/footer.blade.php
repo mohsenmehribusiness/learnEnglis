@@ -16,11 +16,11 @@
             </ul>
         </div>
         <div class="col-6 col-md">
-            <h5>Tags</h5>
+            <a href="{{ route('tag.index')}}"><h5>Tags</h5></a>
             <ul class="list-unstyled text-small">
-                @php $tags=\App\Tag::select('tag','id')->take(6)->get();   @endphp
+                @php $tags=\App\Tag::select('tag')->take(6)->get();   @endphp
                 @foreach($tags as $tag)
-                    <li><a class="text-muted" href="{{ route('tag.tag',['id'=>$tag->id]) }}">
+                    <li><a class="text-muted" href="{{ route('tag.tag',['tag'=>$tag->tag]) }}">
                             {{$tag->tag}}
                         </a></li>
                 @endforeach

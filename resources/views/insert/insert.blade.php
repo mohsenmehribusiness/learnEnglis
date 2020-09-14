@@ -22,7 +22,7 @@
                         @include('insert.SentenceForm')
                     </div>
                 </div>
-            </div>
+        </div>
     </div>
     @include('insert.modalLessonForm')
 @endsection

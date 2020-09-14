@@ -5,13 +5,17 @@
 <ul class="list-group mb-3">
     <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
-            <h6 class="my-0">Word,s</h6>
+            <a href="{{ route('word.index') }}">
+                <h6 class="my-0">Word,s</h6>
+            </a>
         </div>
         <span class="text-muted">{{ $details['wordCount'] }}</span>
     </li>
     <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
-            <h6 class="my-0">Sentences</h6>
+            <a href="">
+                <h6 class="my-0">Sentences</h6>
+            </a>
         </div>
         <span class="text-muted">{{ $details['sentenceCount'] }}</span>
     </li>
@@ -25,7 +29,9 @@
     </li>
     <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
-            <h6 class="my-0">Lessons</h6>
+            <a href="{{ route('lesson.index') }}">
+                <h6 class="my-0">Lessons</h6>
+            </a>
         </div>
         <span class="text-muted">{{ $details['lessons']  }}</span>
     </li>

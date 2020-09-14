@@ -1,14 +1,22 @@
 <?php
-use Illuminate\Support\Facades\Route;
+
 Route::get('/','WordController@index')->name('home');
-Route::get('/translate','WordController@translateGet')->name('translate');
-Route::post('/translate-ajax','WordController@translatePost')->name('translate.ajax');
 Route::post('/checkstate','WordController@checkstate')->name('checkstate');
 Route::post('/get-information-word','WordController@getInformationWord')->name('get.information.word');
 Route::get('/study','WordController@study')->name('study');
 
+//Word
+Route::group(['prefix'=>'word'],function(){
+    Route::get('','WordController@index')->name('word.index');
+});
 
-// Insert
+//Translate
+Route::group(['prefix'=>'translate'],function(){
+    Route::get('/','TranslateController@translateGet')->name('translate');
+    Route::post('/ajax','TranslateController@translatePost')->name('translate.ajax');
+});
+
+//Insert
 Route::group(['prefix'=>'insert'],function (){
     Route::get('','InsertController@insert')->name('insert');
     Route::post('/word','InsertController@insertWord')->name('insert.word');
@@ -16,13 +24,14 @@ Route::group(['prefix'=>'insert'],function (){
     Route::post('/lesson','InsertController@insertLesson')->name('insert.lesson');
 });
 
-Route::group(['prefix'=>'tag'],function () {
+//Tag
+Route::group(['prefix'=>'tags'],function () {
     Route::get('','TagController@index')->name('tag.index');
-    Route::get('/{id}','TagController@tag')->name('tag.tag');
+    Route::get('/{tag}','TagController@tag')->name('tag.tag');
 });
 
-
-Route::group(['prefix'=>'lesson'],function(){
+//Lesson
+Route::group(['prefix'=>'lessons'],function () {
     Route::get('','LessonController@index')->name('lesson.index');
-    Route::get('/{id}','LessonController@lesson')->name('lesson.lesson');
+    Route::get('/{lesson}','LessonController@tag')->name('lesson.lesson');
 });

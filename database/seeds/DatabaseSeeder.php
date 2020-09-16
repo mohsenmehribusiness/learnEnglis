@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         //save english word
         $word=Word::create(['english'=>$this->getRandomEnglishWordOrSentence()]);
         //save details
-        $word->Detail()->create(['usage'=>$this->usage]);
+        $word->Detail()->create(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
         //save relations one many [persians , tags , sentences]
         //set persians
         $persians=$this->getRandomArrayPersians();

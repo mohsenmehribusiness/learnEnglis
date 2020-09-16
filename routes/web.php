@@ -1,13 +1,20 @@
 <?php
-
 Route::get('/','WordController@index')->name('home');
-Route::post('/checkstate','WordController@checkstate')->name('checkstate');
-Route::post('/get-information-word','WordController@getInformationWord')->name('get.information.word');
-Route::get('/study','WordController@study')->name('study');
+
+//Study
+Route::group(['prefix'=>'study'],function(){
+    Route::get('','StudyController@index')->name('study.index');
+    Route::get('/oldest','StudyController@oldest')->name('study.oldest');
+    Route::get('/newest','StudyController@newest')->name('study.newest');
+    Route::get('/state/true','StudyController@stateTrue')->name('study.state.true');
+    Route::get('/state/false','StudyController@stateFalse')->name('study.state.false');
+    Route::post('/checkstate','StudyController@checkstate')->name('study.checkstate');
+    Route::post('/get-information-word','StudyController@getInformationWord')->name('study.get.information.word');
+});
 
 //Word
 Route::group(['prefix'=>'word'],function(){
-    Route::get('','WordController@index')->name('word.index');
+    Route::get('/{word}','WordController@word')->name('word.word');
 });
 
 //Translate
@@ -33,5 +40,5 @@ Route::group(['prefix'=>'tags'],function () {
 //Lesson
 Route::group(['prefix'=>'lessons'],function () {
     Route::get('','LessonController@index')->name('lesson.index');
-    Route::get('/{lesson}','LessonController@tag')->name('lesson.lesson');
+    Route::get('/{lesson}','LessonController@lesson')->name('lesson.lesson');
 });

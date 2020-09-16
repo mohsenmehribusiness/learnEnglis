@@ -1,9 +1,7 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
-
 class Tag extends Model
 {
     protected $fillable=['tag','foreign_id','usage'];
@@ -12,6 +10,10 @@ class Tag extends Model
 
     public function scopeTagSentences($query){
         return $query->whereUsage('sentence');
+    }
+
+    public function scopeFindTag($query,$tag){
+        return $query->whereTag($tag);
     }
 
     public function scopeTagWords($query){

@@ -3,14 +3,18 @@
         <div class="col-12 col-md">
             <img class="mb-2" src="{{ url('images/logo_504.png') }}" alt="" width="24" height="24">
             <small class="d-block mb-3 text-muted">&copy; 2020-2021</small>
+            <h6 class="text-muted">author</h6>
+            <span class="pl-3 text-muted">
+                <li class="fa fa-user-circle-o"></li>
+                mohsen mehri</span>
         </div>
         <div class="col-6 col-md">
-            <h5>Lessons</h5>
+            <a href="{{ route('lesson.index')}}"><h5>Lessons</h5></a>
             <ul class="list-unstyled text-small">
-                @php $lessons=\App\Lesson::select('lesson','id')->take(6)->get();   @endphp
+                @php $lessons=\App\Lesson::select('lesson')->take(6)->get();   @endphp
                 @foreach($lessons as $lesson)
-                    <li><a class="text-muted" href="{{ route('lesson.lesson',['id'=>$lesson->id]) }}">
-                        {{$lesson->lesson}}
+                    <li><a class="text-muted" href="{{ route('lesson.lesson',['lesson'=>$lesson->lesson]) }}">
+                            {{$lesson->lesson}}
                         </a></li>
                 @endforeach
             </ul>
@@ -27,12 +31,14 @@
             </ul>
         </div>
         <div class="col-6 col-md">
-            <h5>About</h5>
+            <a href="{{ route('tag.index')}}"><h5>RandomWord</h5></a>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Locations</a></li>
-                <li><a class="text-muted" href="#">Privacy</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
+                @php $words=\App\Word::all()->random(6);   @endphp
+                @foreach($words as $word)
+                    <li><a class="text-muted" href="{{ route('word.word',['word'=>$word->english]) }}">
+                            {{$word->english}}
+                        </a></li>
+                @endforeach
             </ul>
         </div>
     </div>

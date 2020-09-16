@@ -8,28 +8,32 @@ class Word extends Model
    // protected $casts=['persian'=>'array','sentence'=>'array','tag'=>'array'];
     public $timestamps=false;
 
-    public function Lessons()
-    {
-        return $this->belongsToMany(Lesson::class);
+    public function scopeFindWord($query,$word){
+        return $query->whereEnglish($word);
     }
 
-    public function Tags()
-    {
-        return $this->hasMany(Tag::class, 'foreign_id');
+    public function scopeFindTag($query,$tag){
+        return $query->with('tags')->whereHas('tags', function($query) use ($tag){
+                $query->FindTag($tag);});
     }
 
-    public function Persians()
-    {
-        return $this->hasMany(Persian::class, 'foreign_id');
-    }
 
-    public function Detail()
-    {
-        return $this->hasOne(Detail::class, 'foreign_id');
-    }
+    public function Lessons(){
+        return $this->belongsToMany(Lesson::class);}
 
-    public function Sentences()
-    {
-        return $this->hasMany(sentence::class,'foreign_id');
-    }
+
+    public function Tags(){
+        return $this->hasMany(Tag::class, 'foreign_id');}
+
+
+    public function Persians(){
+        return $this->hasMany(Persian::class, 'foreign_id');}
+
+
+    public function Detail(){
+        return $this->hasOne(Detail::class, 'foreign_id');}
+
+
+    public function Sentences(){
+        return $this->hasMany(sentence::class,'foreign_id');}
 }

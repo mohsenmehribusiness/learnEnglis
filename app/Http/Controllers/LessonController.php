@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Lesson;
 use App\Traits\TagPrivateFunction;
+use App\Word;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -12,11 +13,14 @@ class LessonController extends Controller
     public function index(){
         $objects=new Lesson();
         $letters=$this->productLetters();
-        $general='tag';
-        return view('lesson.index',compact('objects','letters','general'));
+        $general='lesson';
+        return view('tags.index',compact('objects','letters','general'));
     }
 
-    public function tag($tag){
-        return Lesson::FindLesson($tag)->first();
+    public function lesson($lesson){
+        $lesson=Lesson::FindLesson($lesson)->first();
+        $words=$lesson->words()->paginate(20);
+        return view('study.index',compact('words'));
+
     }
 }

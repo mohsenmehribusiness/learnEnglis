@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Tag;
 use App\Traits\TagPrivateFunction;
+use App\Word;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -16,6 +17,7 @@ class TagController extends Controller
     }
 
     public function tag($tag){
-       return Tag::whereTag($tag)->first();
+        $words=Word::select('english','id')->Findtag($tag)->paginate(20);
+        return view('study.index',compact('words'));
     }
 }

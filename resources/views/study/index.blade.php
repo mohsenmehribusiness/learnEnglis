@@ -1,31 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <div id="moreSetting" class="collapse">
-        <div class="row">
-            <div class="col">
-                <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" name="tableBorder" id="tableBorder" >
-                    <label for="tableBorder" class="label">table border</label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" name="tableHover" id="tableHover" >
-                    <label for="tableHover" class="label">table hover</label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" name="tableHoverPersian" id="tableHoverPersian" >
-                    <label for="tableHoverPersian" class="label">table hover persian</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row float-right">
-        <!-- more .. -->
-        <a href="#moreSetting" data-toggle="collapse" class="text-muted">setting</a>
-    </div>
+    @include('study.moreSetting')
     <table id="studyTable" class="table">
         <thead>
         <tr>
@@ -53,9 +28,9 @@
                     </td>
                     <td class="persian-td">
                         <span class="persian">
-                       @foreach($word->persian as $persian)
+                       @foreach($word->persians()->get() as $persian)
                         <span>
-                            {{ $persian }}
+                            {{ $persian->persian }}
                             @if(!$loop->last)
                                 ,
                             @endif
@@ -63,9 +38,9 @@
                         @endforeach
                         </span>
                     </td>
-                    <td class="settingtd text-center" style="visibility:hidden;">
+                    <td class="settingtd text-center hide" >
                         <a  onclick="checkstate({{ $word->id }})" class="px-1 cursor_pointer " >
-                            <i id="state_{{$word->id}}" class="fa {{ $word->state ? 'fa-check text-success' : 'fa-times text-danger' }}" aria-hidden="true"></i>
+                            <i id="state_{{$word->id}}" class="fa {{ $word->Detail->state ? 'fa-check text-success' : 'fa-times text-danger' }}" aria-hidden="true"></i>
                         </a>
                         <a onclick="getInformationWord({{ $word->id }})" class="px-1 cursor_pointer" data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
@@ -105,4 +80,63 @@
 @section('script')
     <script src = "{{ url('js/jqueryAjax.min.js') }}"></script>
     <script src = "{{ url('js/study.js') }}"></script>
+    <script>
+        checkstate=function(id){
+            $.ajax(
+                {
+                    url:"{{route('study.checkstate')}}",
+                    method:"POSt",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{id:id},
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        //alert(data.state);
+                        let ico=$('#state_'+id);
+                        if(data.state){
+                            ico.removeClass('text-danger fa-times').addClass('text-success fa-check');
+                        }
+                        else if(!data.state)
+                        {
+                            ico.removeClass('text-success fa-check').addClass('text-danger fa-times');
+                        }
+                    },
+                    error:function () {
+                        alert("error");
+                    }
+                });
+        };
+
+        getInformationWord=function(id){
+            $.ajax(
+                {
+                    url:"{{ route('study.get.information.word') }}",
+                    method:"POSt",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{id:id},
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        let english=data.word['english'];
+                        let persians=data.word['persians'];
+                        let sentences=data.word['sentence'];
+                        $('#english_text_modal').text(english);
+                        $('#persian_text_modal').text(null);
+                        for (i = 0; i < persians.length; i++){
+                            $('#persian_text_modal').append("<span class='text-muted'>"+persians[i]+"</span>");
+                        }
+
+                        $('#sentences_text_modal').text(null);
+                        for (i = 0; i < sentences.length; i++){
+                            $('#sentences_text_modal').append("<li class='text-muted'>"+sentences[i]+"</li>");
+                        }
+                    }
+                });
+        };
+
+    </script>
 @endsection

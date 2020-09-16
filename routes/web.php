@@ -13,7 +13,8 @@ Route::group(['prefix'=>'study'],function(){
 });
 
 //Word
-Route::group(['prefix'=>'word'],function(){
+Route::group(['prefix'=>'word'],function () {
+    Route::get('','WordController@index')->name('word.index');
     Route::get('/{word}','WordController@word')->name('word.word');
 });
 

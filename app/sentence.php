@@ -16,7 +16,7 @@ class sentence extends Model
 
     public function Tags()
     {
-        return $this->hasMany(Tag::class, 'foreign_id');
+        return $this->belongsToMany(Tag::class);
     }
 
     public function Persians()

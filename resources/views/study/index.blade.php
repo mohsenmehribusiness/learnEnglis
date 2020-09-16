@@ -24,7 +24,7 @@
                         {{ $loop->index+1 }}
                     </th>
                     <td class="text-center">
-                        {{ $word->english }}
+                        {{ $word->word }}
                     </td>
                     <td class="persian-td">
                         <span class="persian">

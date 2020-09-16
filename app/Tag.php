@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
-    protected $fillable=['tag','foreign_id','usage'];
+    protected $fillable=['tag','usage'];
     protected $casts=['tags'=>'array'];
     public $timestamps=false;
 
@@ -24,11 +24,13 @@ class Tag extends Model
         return $query->where('tag', 'like', $key.'%');
     }
 
-    public function Word(){
-        return $this->belongsTo(Word::class);
+    public function words()
+    {
+        return $this->belongsToMany(Word::class);
     }
 
-    public function Sentence(){
-        return $this->belongsTo(sentence::class);
+    public function Sentences()
+    {
+        return $this->belongsToMany(sentence::class);
     }
 }

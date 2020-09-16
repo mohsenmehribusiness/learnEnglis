@@ -21,6 +21,5 @@ class LessonController extends Controller
         $lesson=Lesson::FindLesson($lesson)->first();
         $words=$lesson->words()->paginate(20);
         return view('study.index',compact('words'));
-
     }
 }

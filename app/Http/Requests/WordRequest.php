@@ -24,7 +24,7 @@ class WordRequest extends FormRequest
     public function rules()
     {
         return [
-            'english'=>'required',
+            'word'=>'required',
             'persian'=>'required',
         ];
     }

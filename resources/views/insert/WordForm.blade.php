@@ -1,9 +1,9 @@
-<form class="@error('english') was-validated @enderror @error('persian') was-validated @enderror pt-5 pb-5" action="{{ route('insert.word')}}" method="POST" novalidate>
+<form class="@error('word') was-validated @enderror @error('persian') was-validated @enderror pt-5 pb-5" action="{{ route('insert.word')}}" method="POST" novalidate>
     @csrf
     <div class="row">
         <div class="col-md-6 mb-3">
-            <input type="text" class="form-control" id="english" name="english" placeholder="english" value="" required>
-            @error('english')
+            <input type="text" class="form-control" id="word" name="word" placeholder="english" value="" required>
+            @error('word')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

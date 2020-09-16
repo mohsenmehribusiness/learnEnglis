@@ -9,37 +9,13 @@
                 mohsen mehri</span>
         </div>
         <div class="col-6 col-md">
-            <a href="{{ route('lesson.index')}}"><h5>Lessons</h5></a>
-            <ul class="list-unstyled text-small">
-                @php $lessons=\App\Lesson::select('lesson')->take(6)->get();   @endphp
-                @foreach($lessons as $lesson)
-                    <li><a class="text-muted" href="{{ route('lesson.lesson',['lesson'=>$lesson->lesson]) }}">
-                            {{$lesson->lesson}}
-                        </a></li>
-                @endforeach
-            </ul>
+            @include('layouts.sectionFooter',['title'=>'Lessons','key'=>'lesson','objects'=>\App\Lesson::select('lesson')->take(6)->get()])
         </div>
         <div class="col-6 col-md">
-            <a href="{{ route('tag.index')}}"><h5>Tags</h5></a>
-            <ul class="list-unstyled text-small">
-                @php $tags=\App\Tag::select('tag')->take(6)->get();   @endphp
-                @foreach($tags as $tag)
-                    <li><a class="text-muted" href="{{ route('tag.tag',['tag'=>$tag->tag]) }}">
-                            {{$tag->tag}}
-                        </a></li>
-                @endforeach
-            </ul>
+                @include('layouts.sectionFooter',['title'=>'Tags','key'=>'tag','objects'=>\App\Tag::select('tag')->take(6)->get()])
         </div>
         <div class="col-6 col-md">
-            <a href="{{ route('tag.index')}}"><h5>RandomWord</h5></a>
-            <ul class="list-unstyled text-small">
-                @php $words=\App\Word::all()->random(6);   @endphp
-                @foreach($words as $word)
-                    <li><a class="text-muted" href="{{ route('word.word',['word'=>$word->english]) }}">
-                            {{$word->english}}
-                        </a></li>
-                @endforeach
-            </ul>
+            @include('layouts.sectionFooter',['title'=>'Words','key'=>'word','objects'=>$words=\App\Word::all()->random(6)])
         </div>
     </div>
 </footer>

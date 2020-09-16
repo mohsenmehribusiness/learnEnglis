@@ -17,7 +17,8 @@ class TagController extends Controller
     }
 
     public function tag($tag){
-        $words=Word::select('english','id')->Findtag($tag)->paginate(20);
+        $tag=Tag::FindTag($tag)->first();
+        $words=$tag->words()->paginate(20);
         return view('study.index',compact('words'));
     }
 }

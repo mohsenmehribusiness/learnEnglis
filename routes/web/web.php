@@ -1,4 +1,5 @@
 <?php
+
 Route::get('/','WordController@index')->name('home');
 
 //Study
@@ -12,6 +13,12 @@ Route::group(['prefix'=>'study'],function(){
     Route::post('/get-information-word','StudyController@getInformationWord')->name('study.get.information.word');
 });
 
+//sentence
+Route::group(['prefix'=>'sentence'],function () {
+    Route::get('','SentenceCotroller@index')->name('sentence.index');
+    Route::get('/{sentence}','SentenceCotroller@sentence')->name('sentence.sentence');
+});
+
 //Word
 Route::group(['prefix'=>'word'],function () {
     Route::get('','WordController@index')->name('word.index');
@@ -20,7 +27,7 @@ Route::group(['prefix'=>'word'],function () {
 
 //Translate
 Route::group(['prefix'=>'translate'],function(){
-    Route::get('/','TranslateController@translateGet')->name('translate');
+    Route::get('/','TranslateController@index')->name('translate.index');
     Route::post('/ajax','TranslateController@translatePost')->name('translate.ajax');
 });
 

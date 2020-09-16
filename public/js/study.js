@@ -23,13 +23,6 @@ $(document).ready(function () {
         });
     });
 
-    //visible/hidden persiansWord
-    $("#visiblePersian").change(function() {
-        $('.persian').each(function(){
-            $(this).toggleClass('hide');
-        });
-    });
-
     //column setting
     $("#settingth").change(function() {
         $('.settingtd').each(function(){

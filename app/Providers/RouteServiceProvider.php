@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Traits\FunctionsRouteServiceProviderTrait;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    use FunctionsRouteServiceProviderTrait;
     /**
      * This namespace is applied to your controller routes.
      *
@@ -21,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -43,10 +45,14 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-
-        //
+        //me ..
+        $this->mapInsertRoutes();
+        $this->mapSentenceRoutes();
+        $this->mapStudyRoutes();
+        $this->mapTranslateRoutes();
+        $this->mapWordRoutes();
+        $this->mapExamRoutes();
     }
 
     /**
@@ -60,7 +66,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/web/web.php'));
     }
 
     /**
@@ -75,6 +81,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+            ->group(base_path('routes/api/api.php'));
     }
 }

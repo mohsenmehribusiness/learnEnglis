@@ -1,0 +1,4 @@
+<?php
+
+Route::get('','WordController@index')->name('word.index');
+Route::get('/{word}','WordController@word')->name('word.word');

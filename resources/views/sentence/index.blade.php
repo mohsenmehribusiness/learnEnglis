@@ -4,23 +4,11 @@
     <table id="studyTable" class="table">
         <thead>
         <tr>
-            <th>
-                <label id="thNumber">
-                    <i id="iconNumber" class="fa fa-circle text-muted"></i>
-                    Number
-                </label>
-            </th>
-            <th scope="col" class="text-center">
-                <label id="thWord">
-                    <i id="iconWord" class="fa fa-align-center text-muted"></i>
-                    English
-                </label>
-            </th>
+            <th>Number</th>
+            <th scope="col" class="text-center">English</th>
             <th scope="col">
-                <label id="visiblePersian" class="label">
-                    <i id="iconVisiblePersian" class="fa fa-eye text-muted"></i>
-                    Persian
-                </label>
+                <input class="form-check-input m-1 p-1 position-static" type="checkbox" checked id="visiblePersian" >
+                <label for="visiblePersian" class="label">Persian</label>
             </th>
             <th class="text-center">
                 <input class="form-check-input m-1 p-1 position-static" style="opacity:0.1;" type="checkbox" id="settingth" >
@@ -29,12 +17,13 @@
         </tr>
         </thead>
         <tbody>
+            @php $i=(int) 1; @endphp
             @foreach($words as $word)
                 <tr>
-                    <td  class="number">
+                    <th scope="row">
                         {{ $loop->index+1 }}
-                    </td>
-                    <td class="text-center td-word">
+                    </th>
+                    <td class="text-center">
                         {{ $word->word }}
                     </td>
                     <td class="persian-td">
@@ -58,6 +47,7 @@
                         </a>
                     </td>
                 </tr>
+                @php $i++ @endphp
             @endforeach
         </tbody>
     </table>
@@ -148,40 +138,5 @@
                 });
         };
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#thWord').click(function () {
-                $('#iconWord').toggleClass('fa-align-center');
-                $('#iconWord').toggleClass('fa-align-left');
-                $('.td-word').each(function () {
-                    $(this).toggleClass('text-center');
-                });
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-             //visible/hidden persiansWord
-                $("#visiblePersian").click(function() {
-                    $('#iconVisiblePersian').toggleClass('fa-eye-slash');
-                    $('#iconVisiblePersian').toggleClass('fa-eye');
-                    $('.persian').each(function(){
-                        $(this).toggleClass('hide');
-                    });
-                });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            //visible/hidden persiansWord
-            $("#thNumber").click(function() {
-                $('#iconNumber').toggleClass('fa-circle');
-                $('#iconNumber').toggleClass('fa-circle-o');
-                $('.number').each(function(){
-                    $(this).toggleClass('hide');
-                });
-            });
-        });
     </script>
 @endsection

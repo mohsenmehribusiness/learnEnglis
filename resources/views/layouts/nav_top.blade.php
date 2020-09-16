@@ -20,13 +20,19 @@
             <a class="nav-link" href="{{ route('study.index') }}">Study</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('sentence.index') }}">Sentences</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('word.index') }}">Words</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('tag.index') }}">Tags</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('lesson.index') }}">Lessons</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('translate') }}">Translate</a>
+            <a class="nav-link" href="{{ route('translate.index') }}">Translate</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('insert') }}">Insert</a>

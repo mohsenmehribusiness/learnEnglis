@@ -12,10 +12,6 @@ class Detail extends Model
         return $this->belongsTo(Word::class);
     }
 
-    public function AllWordsStateTrue(){
-        return $this->Word();
-    }
-
     public function Sentence(){
         return $this->belongsTo(sentence::class);
     }

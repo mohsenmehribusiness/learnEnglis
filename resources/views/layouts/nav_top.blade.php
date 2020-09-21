@@ -5,37 +5,35 @@
     </h5>
     <ul class="nav nav-pills">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lessons</a>
+            <a class="text-muted  nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lessons</a>
             <div class="dropdown-menu">
-               @php $lessons=\App\Lesson::all()->take(10); @endphp
                 @foreach($lessons as $lesson)
-                    <a class="dropdown-item" href="#">{{$lesson->lesson}}</a>
+                    <a class="dropdown-item"
+                       href="{{ route("lesson.lesson",["lesson"=>$lesson->lesson]) }}">
+                        {{$lesson->lesson}}</a>
                 @endforeach
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Exam</a>
+            <a class="text-muted  nav-link" href="{{ route('exam.index') }}">Exam</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('study.index') }}">Study</a>
+            <a class="text-muted  nav-link" href="{{ route('sentence.index') }}">Sentences</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('sentence.index') }}">Sentences</a>
+            <a class="text-muted  nav-link" href="{{ route('word.index') }}">Words</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('word.index') }}">Words</a>
+            <a class="text-muted  nav-link" href="{{ route('tag.index') }}">Tags</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('tag.index') }}">Tags</a>
+            <a class="text-muted  nav-link" href="{{ route('lesson.index') }}">Lessons</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('lesson.index') }}">Lessons</a>
+            <a class="text-muted  nav-link" href="{{ route('translate.index') }}">Translate</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('translate.index') }}">Translate</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('insert') }}">Insert</a>
+            <a class="text-muted  nav-link" href="{{ route('insert') }}">Insert</a>
         </li>
     </ul>
 </div>

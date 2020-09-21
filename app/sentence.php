@@ -14,18 +14,24 @@ class sentence extends Model
         return $this->belongsToMany(Lesson::class);
     }
 
+    public function scopeUsage($query,$usage){
+        return $query->whereUsage($usage);
+    }
+
     public function Tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function Persians()
-    {
-        return $this->hasMany(Persian::class, 'foreign_id');
+    public function Persians(){
+        return $this->belongsToMany(Persian::class);
     }
 
-    public function Detail()
-    {
+    public function Detail(){
         return $this->hasOne(Detail::class, 'foreign_id');
+    }
+
+    public function scopeStateCheck($query,$state){
+        return $query->whereHas('Detail', function($query) use ($state) {$query->whereState($state);});
     }
 }

@@ -1,10 +1,9 @@
 <?php
-
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
-    protected $fillable=['tag','usage'];
+    protected $fillable=['tag'];
     protected $casts=['tags'=>'array'];
     public $timestamps=false;
 

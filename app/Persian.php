@@ -1,15 +1,21 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Persian extends Model
 {
-    protected $fillable=['persian','foreign_id','usage'];
+    protected $fillable=['persian'];
     public $timestamps=false;
 
-    public function Word(){
-        return $this->belongsTo(Word::class);
+    public function scopeFindPersian($query,$persian){
+        return $query->wherePersian($persian);
+    }
+
+    public function words(){
+        return $this->belongsToMany(Word::class);
+    }
+
+    public function Sentences(){
+        return $this->belongsToMany(sentence::class);
     }
 }

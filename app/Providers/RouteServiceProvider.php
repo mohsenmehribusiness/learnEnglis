@@ -48,6 +48,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         //me ..
         $this->mapInsertRoutes();
+        $this->mapTagRoutes();
+        $this->mapLessonRoutes();
         $this->mapSentenceRoutes();
         $this->mapStudyRoutes();
         $this->mapTranslateRoutes();

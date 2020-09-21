@@ -4,6 +4,7 @@ use App\Detail;
 use App\Lesson;
 use App\sentence;
 use App\Tag;
+use App\Persian;
 use App\Word;
 use Illuminate\Http\Request;
 
@@ -38,17 +39,15 @@ trait PrivateFunctionInsert
             $modal->$relation()->create(["{$type}"=>$item,'usage'=>$this->usage]);
     }
 
-    private function createOrExistTag($tag){
-        $find=null;
-        ($find=Tag::FindTag($tag)->first())? $tag=$find : $tag=Tag::create(['tag'=>$tag,'usage'=>$this->usage]);
-        return $tag->id;
+    private function createOrExist($object,$modal,$key){
+        return (($find=$modal::where($key,$object)->first())? $object=$find : $object=$modal::create(["{$key}"=>$object]))->id;
     }
 
-    private function makeListTagsId($tags){
-        $ar=array();
-        foreach($tags as $tag)
-            array_push($ar,$this->createOrExistTag($tag));
-        return $ar;
+    private function makeListId($objects,$modal,$key){
+        $list=array();
+        foreach($objects as $object)
+            array_push($list,$this->createOrExist($object,$modal,$key));
+        return $list;
     }
 
 }

@@ -1,13 +1,8 @@
-<br>
-<span class="px-5 text-primary">words</span>
-<span class="px-5 text-info">sentences</span>
-<br>
-<br>
 @foreach($letters as $key=>$value)
     <a href="">
         <h4 class="text-danger">
             {{ $key }}
-        </h4>
+         </h4>
     </a>
     <div class="row">
         <div class="col">
@@ -15,7 +10,7 @@
                 @php $nameFunction=ucfirst($general).'StartLetter';  @endphp
                 @foreach($objects->$nameFunction($value)->get() as $object)
                     <a href="{{ route("{$general}.{$general}",["{$general}"=>$object->$general]) }}">
-                       <span class="pl-1 {{ $object->usage=='sentence'? 'text-info' : null }}">
+                       <span class="pl-1">
                                 {{ $object->$general }}
                         </span>
                     </a>

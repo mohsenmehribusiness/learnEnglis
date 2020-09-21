@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.0",
         "stichoza/google-translate-php": "^4.1",
         "uxweb/sweet-alert": "^2.0",
+        "yajra/laravel-datatables-oracle": "~9.0",
         "ybazli/faker": "^1.0",
         "yoeunes/toastr": "^1.2"
     },
@@ -43,6 +44,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

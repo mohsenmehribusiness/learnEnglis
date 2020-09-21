@@ -6,7 +6,9 @@ use App\Http\Requests\LessonRequest;
 use App\Http\Requests\SentenceRequest;
 use App\Http\Requests\WordRequest;
 use App\Lesson;
+use App\Persian;
 use App\sentence;
+use App\Tag;
 use App\Traits\PrivateFunctionInsert;
 use App\Word;
 use Illuminate\Http\Request;
@@ -14,7 +16,6 @@ use Illuminate\Http\Request;
 class InsertController extends Controller
 {
     use PrivateFunctionInsert;
-
 
     public function insert(){
         $details=$this->getDetails();
@@ -38,10 +39,17 @@ class InsertController extends Controller
         $english=$inputs['word'];
         $word=Word::create(['word'=>$english]);
         //save details
-        $word->Detail()->create(['usage'=>$this->usage]);
-        //save persians
-        $persians=$this->explodeArray($inputs['persian']);
-        $this->SaveOneToMany($word,$persians,'Persians','persian');
+
+        //save persian
+        $persians=$this->makeListId($this->explodeArray($inputs['persian']),new Persian(),'persian');
+        $word->Persians()->sync($persians);
+
+        //save tag
+        if(!is_null($inputs['tag'])){
+            $tags=$this->makeListId($this->explodeArray($inputs['tag']),new Tag(),'tag');
+            $word->Tags()->sync($tags);
+        }
+
         //save sentence
         if(!is_null($inputs['sentence'])){
             $sentences=$this->explodeArray($inputs['sentence']);
@@ -53,36 +61,33 @@ class InsertController extends Controller
             $lessons = $inputs['lesson'];
             $word->Lessons()->sync($lessons);
         }
-        //save tag
-        if(!is_null($inputs['tag'])){
-            $tags=$this->explodeArray($inputs['tag']);
-            $tags=$this->makeListTagsId($tags);
-            $word->Tags()->sync($tags);
-        }
 
         alert('word saved',$english);
         return back();
         //messages...
-
     }
 
 
     public function insertSentence(SentenceRequest $request){
         $this->usage='sentence';
         $inputs=$request->except('_token');
-        $persians=$this->explodeArray($inputs['persian']);
-        //save english word
+
+        //save english sentence
         $sentence=sentence::create(['sentence'=>$inputs['sentence'],'usage'=>$this->usage]);
 
         //save details
         $sentence->Detail()->create(['usage'=>$this->usage]);
 
+        //save persian
+        $persians=$this->makeListId($this->explodeArray($inputs['persian']),new Persian(),'persian');
+        $sentence->Persians()->sync($persians);
+
         //save tag
         if(!is_null($inputs['tag'])){
-            $tags=$this->explodeArray($inputs['tag']);
-            $tags=$this->makeListTagsId($tags);
+            $tags=$this->makeListId($this->explodeArray($inputs['tag']),new Tag(),'tag');
             $sentence->Tags()->sync($tags);
         }
+
         //save lessons
         if(isset($inputs['lesson'])) {
             $lessons = $inputs['lesson'];

@@ -15,3 +15,6 @@
         text: 'Thumbnail'
     });
 </script>
+<!-- yajra datatable -->
+<script src="{{ url('js/jquery.dataTables.min.js') }}"></script>
+<!-- yajra datatable -->

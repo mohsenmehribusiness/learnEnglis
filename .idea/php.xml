@@ -107,6 +107,7 @@
       <path value="$PROJECT_DIR$/vendor/ybazli/faker" />
       <path value="$PROJECT_DIR$/vendor/stichoza/google-translate-php" />
       <path value="$PROJECT_DIR$/vendor/yoeunes/toastr" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

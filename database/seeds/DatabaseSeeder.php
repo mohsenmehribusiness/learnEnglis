@@ -1,6 +1,8 @@
 <?php
 use App\Lesson;
+use App\Persian;
 use App\sentence;
+use App\Tag;
 use App\Traits\PrivateFunctionInsert;
 use App\Traits\PrivateFunctionDbSeederTrait;
 use App\Word;
@@ -29,8 +31,8 @@ class DatabaseSeeder extends Seeder
         $word->Detail()->create(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
 
         //set persians
-        $persians=$this->getRandomArrayPersians();
-        $this->SaveOneToMany($word,$persians,'Persians','persian');
+        $persians=$this->makeListId($this->getRandomArrayPersians(),new Persian(),'persian');
+        $word->Persians()->sync($persians);
 
         //set senternces
         if(rand(0,1))
@@ -38,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         //set tags
         if(rand(0,1)){
-            $tags=$this->makeListTagsId($this->getRandomTags());
+            $tags=$this->makeListId($this->getRandomTags(),new Tag(),'tag');
             $word->Tags()->sync($tags);
         }
 
@@ -57,15 +59,18 @@ class DatabaseSeeder extends Seeder
         $sentence=sentence::create(['sentence'=>$this->getRandomEnglishWordOrSentence(),'usage'=>$this->usage]);
         //save details
         $sentence->Detail()->create(['usage'=>$this->usage]);
-        //save persian
-        $this->SaveOneToMany($sentence,$this->getRandomArrayPersians(),'Persians','persian');
+
+        //set persian
+        if(rand(0,1)){
+            $persians=$this->makeListId($this->getRandomArrayPersians(),new Persian(),'persian');
+            $sentence->Persians()->sync($persians);
+        }
 
         //set tags
         if(rand(0,1)){
-            $tags=$this->makeListTagsId($this->getRandomTags());
+            $tags = $this->makeListId($this->getRandomTags(), new Tag(), 'tag');
             $sentence->Tags()->sync($tags);
         }
-
         //save lesson
         if(rand(0,1))
             $sentence->Lessons()->sync($this->getRandomArrayIdLessons());

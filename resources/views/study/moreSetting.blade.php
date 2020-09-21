@@ -24,23 +24,22 @@
     <div class="row pt-3">
         <div class="col">
             <div class="form-check">
-
-                <a class="text-muted" href="{{ route('study.oldest') }}">
-                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('study.oldest')])"></i>
+                <a class="text-muted" href="{{ route('web.oldest') }}">
+                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.oldest')])"></i>
                     Oldest</a>
             </div>
         </div>
         <div class="col">
             <div class="form-check">
-                <a class="text-muted" href="{{ route('study.newest') }}">
-                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('study.newest')])"></i>
+                <a class="text-muted" href="{{ route('web.newest') }}">
+                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.newest')])"></i>
                     Newest</a>
             </div>
         </div>
         <div class="col">
             <div class="form-check">
-                <a class="text-muted" href="{{ route('study.state.false') }}">
-                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('study.state.false')])"></i>
+                <a class="text-muted" href="{{ route('web.state.false') }}">
+                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.state.false')])"></i>
                     State
                     <i class="fa fa fa-times"></i>
                 </a>
@@ -48,8 +47,8 @@
         </div>
         <div class="col">
             <div class="form-check">
-                <a class="text-muted" href="{{ route('study.state.true') }}">
-                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('study.state.true')])"></i>
+                <a class="text-muted" href="{{ route('web.state.true') }}">
+                    <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.state.true')])"></i>
                     State
                     <i class="fa fa fa-check"></i>
                 </a>

@@ -94,7 +94,7 @@
         checkstate=function(id){
             $.ajax(
                 {
-                    url:"{{route('study.checkstate')}}",
+                    url:"{{route('word.checkstate')}}",
                     method:"POSt",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

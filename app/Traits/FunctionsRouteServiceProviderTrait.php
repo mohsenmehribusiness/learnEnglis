@@ -16,6 +16,20 @@ trait FunctionsRouteServiceProviderTrait
             ->group(base_path('routes/web/translate.php'));
     }
 
+    public function mapTagRoutes() {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->prefix('tags')
+            ->group(base_path('routes/web/tag.php'));
+    }
+
+    public function mapLessonRoutes() {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->prefix('lessons')
+            ->group(base_path('routes/web/lesson.php'));
+    }
+
     public function mapExamRoutes() {
         Route::middleware('web')
             ->namespace($this->namespace)

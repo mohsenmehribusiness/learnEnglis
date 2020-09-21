@@ -12,3 +12,6 @@
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="{{ url('font-awesome/css/font-awesome.css') }}">
 <!-- Font Awesome Icons -->
+<!-- yajra datatable -->
+<link rel="stylesheet" href="{{ url('css/jquery.dataTables.min.css') }}">
+<!-- yajra datatable -->

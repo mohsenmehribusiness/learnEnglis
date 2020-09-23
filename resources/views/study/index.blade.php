@@ -1,65 +1,16 @@
 @extends('layouts.master')
+
 @section('content')
     @include('study.moreSetting')
-    <table id="studyTable" class="table">
+    <table class="table table-bordered" id="users-table">
         <thead>
         <tr>
-            <th>
-                <label id="thNumber">
-                    <i id="iconNumber" class="fa fa-circle text-muted"></i>
-                    Number
-                </label>
-            </th>
-            <th scope="col" class="text-center">
-                <label id="thWord">
-                    <i id="iconWord" class="fa fa-align-center text-muted"></i>
-                    English
-                </label>
-            </th>
-            <th scope="col">
-                <label id="visiblePersian" class="label">
-                    <i id="iconVisiblePersian" class="fa fa-eye text-muted"></i>
-                    Persian
-                </label>
-            </th>
-            <th class="text-center">
-                <input class="form-check-input m-1 p-1 position-static" style="opacity:0.1;" type="checkbox" id="settingth" >
-                <label for="settingth" id="settingthlabel" class="label text-muted">Setting</label>
-            </th>
+            <th>Number</th>
+            <th>English</th>
+            <th>Persian</th>
+            {{--<th>Persian</th>--}}
         </tr>
         </thead>
-        <tbody>
-            @foreach($words as $word)
-                <tr>
-                    <td  class="number">
-                        {{ $loop->index+1 }}
-                    </td>
-                    <td class="text-center td-word">
-                        {{ $word->word }}
-                    </td>
-                    <td class="persian-td">
-                        <span class="persian">
-                       @foreach($word->persians()->get() as $persian)
-                        <span>
-                            {{ $persian->persian }}
-                            @if(!$loop->last)
-                                ,
-                            @endif
-                        </span>
-                        @endforeach
-                        </span>
-                    </td>
-                    <td class="settingtd text-center hide" >
-                        <a  onclick="checkstate({{ $word->id }})" class="px-1 cursor_pointer " >
-                            <i id="state_{{$word->id}}" class="fa {{ $word->Detail->state ? 'fa-check text-success' : 'fa-times text-danger' }}" aria-hidden="true"></i>
-                        </a>
-                        <a onclick="getInformationWord({{ $word->id }})" class="px-1 cursor_pointer" data-toggle="modal" data-target=".bd-example-modal-lg">
-                            <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
     </table>
     <!-- modal -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -73,18 +24,20 @@
                 </div>
                 <br>
                 <span class="text-muted">sentences</span>
-                    <ol class="px-4 py-4" id="sentences_text_modal">
-                    </ol>
+                <ol class="px-4 py-4" id="sentences_text_modal">
+                </ol>
             </div>
         </div>
     </div>
-   <!-- modal -->
-    {{ $words->links() }}
+    <!-- modal -->
 @endsection
 
 @section('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ url('css/study.css') }}">
+    <!-- yajra datatable -->
+    <link rel="stylesheet" href="{{ url('css/jquery.dataTables.min.css') }}">
+    <!-- yajra datatable -->
 @endsection
 
 @section('script')
@@ -162,14 +115,14 @@
     </script>
     <script>
         $(document).ready(function () {
-             //visible/hidden persiansWord
-                $("#visiblePersian").click(function() {
-                    $('#iconVisiblePersian').toggleClass('fa-eye-slash');
-                    $('#iconVisiblePersian').toggleClass('fa-eye');
-                    $('.persian').each(function(){
-                        $(this).toggleClass('hide');
-                    });
+            //visible/hidden persiansWord
+            $("#visiblePersian").click(function() {
+                $('#iconVisiblePersian').toggleClass('fa-eye-slash');
+                $('#iconVisiblePersian').toggleClass('fa-eye');
+                $('.persian').each(function(){
+                    $(this).toggleClass('hide');
                 });
+            });
         });
     </script>
     <script>
@@ -184,4 +137,24 @@
             });
         });
     </script>
+    <!-- yajra datatable -->
+    <script src="{{ url('js/jquery.dataTables.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(function(){
+                $('#users-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{ route($route) }}',
+                    columns: [
+                        { data: 'id', name: 'id' },
+                        { data: 'word', name: 'word' },
+                        { data: 'persian', name: 'persian' },
+                        /* { data: 'persian', name: 'persian' }*/
+                    ]
+                });
+            });
+        });
+    </script>
+    <!-- yajra datatable -->
 @endsection

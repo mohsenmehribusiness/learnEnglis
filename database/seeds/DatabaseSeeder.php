@@ -83,6 +83,7 @@ class DatabaseSeeder extends Seeder
 
     public function run(Faker $faker)
     {
+      /*factory(App\User::class, 50)->create();*/
       $this->CreateMultiThings(15,35,'CreateOneLesson');
       $this->CreateMultiThings(65,90,'CreateOneWord');
       $this->CreateMultiThings(65,70,'CreateOneSentence');

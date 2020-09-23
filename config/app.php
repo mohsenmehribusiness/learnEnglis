@@ -144,7 +144,7 @@ return [
         /* me */
         Ybazli\Faker\FakerServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
         /* me */
 
         Illuminate\Auth\AuthServiceProvider::class,
@@ -199,7 +199,6 @@ return [
     'aliases' => [
         /*me*/
         'Faker' => Ybazli\Faker\Facades\Faker::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         /*me*/
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

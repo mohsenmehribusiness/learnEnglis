@@ -5,5 +5,8 @@ use App\Word;
 
 trait Study
 {
+    public function oldest(){
+        return $this->words;
+    }
 
 }

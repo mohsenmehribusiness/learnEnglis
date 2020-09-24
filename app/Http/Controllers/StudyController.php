@@ -14,17 +14,19 @@ class StudyController extends Controller
         return view('study.index',compact('route'));
     }
 
+    public $words=null;
     public function AjaxQueryData(Request $request){
-        return Datatables::of(Word::query())
-
-
+        $this->words=Datatables::of(Word::query())
             ->setRowId(function ($user) {
             return $user->id;
         })
-
         ->addColumn('persian', function(Word $word){return view('study.yajra.persianColumn',compact('word'));})
         ->addColumn('setting', function(Word $word){return view('study.yajra.settingColumn',compact('word'));})
+            //??  i,m want here just right here
+        ->filter(function(Word $word){ return $word->details()->state == 1;}) //*********i,m want like here
+            //??  i,m want here just right here
         ->make(true);
+        return $this->words;
     }
 
     public function getInformationWord(Request $request){

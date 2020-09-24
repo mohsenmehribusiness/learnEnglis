@@ -5,10 +5,28 @@
     <table class="table table-bordered" id="users-table">
         <thead>
         <tr>
-            <th>Number</th>
-            <th>English</th>
-            <th>Persian</th>
-            {{--<th>Persian</th>--}}
+            <th>
+                <label id="thNumber">
+                    <i id="iconNumber" class="fa fa-circle text-muted"></i>
+                    Number
+                </label>
+            </th>
+            <th>
+                <label id="thWord">
+                    <i id="iconWord" class="fa fa-align-center text-muted"></i>
+                    English
+                </label>
+            </th>
+            <th>
+                <label id="visiblePersian" class="label">
+                    <i id="iconVisiblePersian" class="fa fa-eye text-muted"></i>
+                    Persian
+                </label>
+            </th>
+            <th>
+                <input class="form-check-input m-1 p-1 position-static" style="opacity:0.1;" type="checkbox" id="settingth" >
+                <label for="settingth" id="settingthlabel" class="label text-muted">Setting</label>
+            </th>
         </tr>
         </thead>
     </table>
@@ -150,7 +168,7 @@
                         { data: 'id', name: 'id' },
                         { data: 'word', name: 'word' },
                         { data: 'persian', name: 'persian' },
-                        /* { data: 'persian', name: 'persian' }*/
+                        { data: 'setting', name: 'setting' }
                     ]
                 });
             });

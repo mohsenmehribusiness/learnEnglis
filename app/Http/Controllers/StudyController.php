@@ -23,6 +23,7 @@ class StudyController extends Controller
         })
 
         ->addColumn('persian', function(Word $word){return view('study.yajra.persianColumn',compact('word'));})
+        ->addColumn('setting', function(Word $word){return view('study.yajra.settingColumn',compact('word'));})
         ->make(true);
     }
 

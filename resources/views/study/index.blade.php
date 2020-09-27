@@ -70,12 +70,12 @@
                 $('#studyTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{{ route($route) }}',
+                    ajax: '{{ route($routes["ajax"]) }}',
                     columns: [
                         { data: 'id', name: 'id' },
                         { data: 'word', name: 'word' },
-                        { data: 'persian', name: 'persian' },
-                        { data: 'setting', name: 'setting' }
+                        { data: 'persian', name: 'persian' ,orderable:false,searchable:false},
+                        { data: 'setting', name: 'setting',orderable:false,searchable:false },
                     ]
                 });
             });

@@ -11,8 +11,24 @@ class Word extends Model
         return $query->whereWord($word);
     }
 
-    public function scopeStateCheck($query,$state){
-        return $query->whereHas('Detail', function($query) use ($state) {$query->whereState($state);});
+    public function scopeStateCheck($query,$state=null){
+       if($state=='1')
+           $query->whereHas('Detail', function($query) use ($state) {
+               $query->where
+               ([
+                   ['state', '=',1],
+                   ['usage', '=', 'word'],
+               ]);
+           });
+       elseif ($state=='0')
+           $query->whereHas('Detail', function($query) use ($state) {
+               $query->where
+               ([
+                   ['state', '=',0],
+                   ['usage', '=', 'word'],
+               ]);
+           });
+       return $query;
     }
 
     public function Lessons(){

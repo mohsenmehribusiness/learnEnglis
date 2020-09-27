@@ -40,22 +40,22 @@
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route('web.oldest') }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.oldest')])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["old"]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["old"])])"></i>
                             Oldest</a>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route('web.newest') }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.newest')])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["new"]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["new"])])"></i>
                             Newest</a>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route('web.state.false') }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.state.false')])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["stateTimes"]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["stateTimes"])])"></i>
                             State
                             <i class="fa fa fa-times"></i>
                         </a>
@@ -63,8 +63,8 @@
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route('web.state.true') }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route('web.state.true')])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["stateCheck"]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["stateCheck"])])"></i>
                             State
                             <i class="fa fa fa-check"></i>
                         </a>

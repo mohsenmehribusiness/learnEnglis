@@ -14,7 +14,7 @@ interface OrderInterface
     /**
      * @return mixed
      */
-    public  function  old();
+    public  function  old($vlue=null);
 
     /**
      * @return mixed
@@ -24,7 +24,7 @@ interface OrderInterface
     /**
      * @return mixed
      */
-    public  function  new();
+    public  function  new($value=null);
 
     /**
      * @return mixed
@@ -35,7 +35,7 @@ interface OrderInterface
     /**
      * @return mixed
      */
-    public  function StateCheck();
+    public  function StateCheck($value=null);
 
     /**
      * @return mixed
@@ -45,7 +45,7 @@ interface OrderInterface
     /**
      * @return mixed
      */
-    public  function StateTimes();
+    public  function StateTimes($value=null);
 
     /**
      * @return mixed

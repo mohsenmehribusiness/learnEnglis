@@ -6,28 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSentencesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('sentences', function (Blueprint $table) {
             $table->id();
-            $table->string('usage')->nullable();
-            $table->bigInteger('foreign_id')->nullable();
-            $table->text('sentence');
+            $table->text('sentence')->unique();
+        });
+
+        Schema::create('sentence_word', function (Blueprint $table) {
+            $table->unsignedBigInteger('sentence_id');
+            $table->foreign('sentence_id')->references('id')->on('sentences')->onDelete('cascade');
+            $table->unsignedBigInteger('word_id');
+            $table->foreign('word_id')->references('id')->on('words')->onDelete('cascade');
+            $table->unique(['sentence_id','word_id']);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
+        Schema::dropIfExists('sentence_word');
         Schema::dropIfExists('sentences');
     }
 }

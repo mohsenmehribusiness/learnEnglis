@@ -6,16 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class sentence extends Model
 {
-    protected $fillable=['sentence','usage','foreign_id'];
+    protected $fillable=['sentence'];
     public $timestamps=false;
 
     public function Lessons()
     {
         return $this->belongsToMany(Lesson::class);
-    }
-
-    public function scopeUsage($query,$usage){
-        return $query->whereUsage($usage);
     }
 
     public function Tags()
@@ -33,5 +29,10 @@ class sentence extends Model
 
     public function scopeStateCheck($query,$state){
         return $query->whereHas('Detail', function($query) use ($state) {$query->whereState($state);});
+    }
+
+    public function words()
+    {
+        return $this->belongsToMany(Word::class);
     }
 }

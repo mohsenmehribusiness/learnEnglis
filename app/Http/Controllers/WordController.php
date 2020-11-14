@@ -1,28 +1,28 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Controllers\Interfaces\OrderInterface;
 use App\Traits\FunctionPrivateWordControllerTrait;
+use App\Traits\WordOrder;
 use App\Word;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class WordController extends Controller
+class WordController extends Controller implements OrderInterface
 {
-    use FunctionPrivateWordControllerTrait;
+    use FunctionPrivateWordControllerTrait,WordOrder;
     public function index(){
-        $route="study.data";
-        return view('study.index',compact('route'));
+        $this->setRoutes();
+        $this->routes["ajax"]="study.data";
+        $routes=$this->routes;
+        return view('study.index',compact('routes'));
     }
 
     public function AjaxQueryData(Request $request){
-        return Datatables::of(Word::StateCheck())
-            ->setRowId(function ($user) {
-                return $user->id;
-            })
+        return Datatables::of(Word::query())
             ->addColumn('persian', function(Word $word){return view('study.yajra.persianColumn',compact('word'));})
             ->addColumn('setting', function(Word $word){return view('study.yajra.settingColumn',compact('word'));})
             ->make(true);
     }
-
 
     public function word($word){
         return Word::FindWord($word)->first();

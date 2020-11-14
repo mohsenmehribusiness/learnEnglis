@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Traits;
 use Faker\Generator as Faker;
 use Ybazli\Faker\Facades\Faker as PFaker;
@@ -23,7 +21,7 @@ trait PrivateFunctionDbSeederTrait
         $persians=array();
         $usage=$this->usage;
         for($i=0;$i<$this->getRandomNumber(1,5);$i++)
-            array_push($persians,$this->faker->word);
+            array_push($persians,PFaker::$usage());
             //array_push($persians,PFaker::$usage());
         return $persians;
     }

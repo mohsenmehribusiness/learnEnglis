@@ -1,16 +1,14 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreatePersiansTable extends Migration
 {
     public function up()
     {
         Schema::create('persians', function (Blueprint $table) {
             $table->id();
-            $table->text('persian');
+            $table->text('persian')->unique();
         });
         Schema::create('persian_word', function (Blueprint $table) {
             $table->unsignedBigInteger('persian_id');

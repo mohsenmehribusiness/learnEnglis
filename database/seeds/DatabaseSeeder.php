@@ -25,18 +25,21 @@ class DatabaseSeeder extends Seeder
         $this->usage='word';
 
         //save english word
-        $word=Word::create(['word'=>$this->getRandomEnglishWordOrSentence()]);
+        $word=Word::firstOrCreate(['word'=>$this->getRandomEnglishWordOrSentence()]);
 
         //save details
-        $word->Detail()->create(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
+        $word->Detail()->updateOrCreate(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
 
         //set persians
         $persians=$this->makeListId($this->getRandomArrayPersians(),new Persian(),'persian');
         $word->Persians()->sync($persians);
 
-        //set senternces
+        //set sentences
         if(rand(0,1))
-            $this->SaveOneToMany($word, $this->getRandomSentences(), 'Sentences', 'sentence');
+        {
+            $sentences=$this->makeListId($this->getRandomSentences(),new sentence(),'sentence');
+            $word->Sentences()->sync($sentences);
+        }
 
         //set tags
         if(rand(0,1)){
@@ -56,9 +59,10 @@ class DatabaseSeeder extends Seeder
     private function CreateOneSentence(){
         $this->usage='sentence';
         //save english word
-        $sentence=sentence::create(['sentence'=>$this->getRandomEnglishWordOrSentence(),'usage'=>$this->usage]);
+        $sentence=sentence::firstOrCreate(['sentence'=>$this->getRandomEnglishWordOrSentence()]);
+
         //save details
-        $sentence->Detail()->create(['usage'=>$this->usage]);
+        $sentence->Detail()->updateOrCreate(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
 
         //set persian
         if(rand(0,1)){
@@ -83,7 +87,7 @@ class DatabaseSeeder extends Seeder
 
     public function run(Faker $faker)
     {
-      factory(App\User::class, 15)->create();
+      //factory(App\User::class, 15)->create();
       $this->CreateMultiThings(15,35,'CreateOneLesson');
       $this->CreateMultiThings(65,90,'CreateOneWord');
       $this->CreateMultiThings(65,70,'CreateOneSentence');

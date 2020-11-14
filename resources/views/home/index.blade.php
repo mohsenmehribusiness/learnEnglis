@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('content')
     <div class="row">
-        <div class="col-6 border"></div>
+        <div class="col-6 border">
+        </div>
         <div class="col-6 p-5">
             <div class="row">
                 @foreach($details as $key=>$value)

@@ -44,6 +44,7 @@ class Word extends Model
         return $this->hasOne(Detail::class, 'foreign_id');}
 
     public function Sentences(){
-        return $this->hasMany(sentence::class,'foreign_id');}
+        return $this->belongsToMany(sentence::class);
+    }
 
 }

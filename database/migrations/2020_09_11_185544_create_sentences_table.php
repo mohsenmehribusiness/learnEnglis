@@ -1,19 +1,16 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreateSentencesTable extends Migration
 {
     public function up()
     {
         Schema::create('sentences', function (Blueprint $table) {
             $table->id();
-            $table->text('sentence')->unique();
+            $table->text('word')->unique();
         });
-
-        Schema::create('sentence_word', function (Blueprint $table) {
+        Schema::create('sentence_word', function (Blueprint $table){
             $table->unsignedBigInteger('sentence_id');
             $table->foreign('sentence_id')->references('id')->on('sentences')->onDelete('cascade');
             $table->unsignedBigInteger('word_id');

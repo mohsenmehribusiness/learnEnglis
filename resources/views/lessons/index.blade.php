@@ -6,6 +6,12 @@
         <thead>
         <tr>
             <th>
+                <label id="thNumber">
+                    <i id="iconNumber" class="fa fa-circle text-muted"></i>
+                    Number
+                </label>
+            </th>
+            <th>
                 <label id="thWord">
                     <i id="iconWord" class="fa fa-align-center text-muted"></i>
                     English
@@ -18,7 +24,7 @@
                 </label>
             </th>
             <th>
-                <input class="form-check-input m-1 p-1 position-static" style="opacity:0.1;" type="checkbox" id="settingth" checked>
+                <input class="form-check-input m-1 p-1 position-static" style="opacity:0.1;" type="checkbox" id="settingth" >
                 <label for="settingth" id="settingthlabel" class="label text-muted">Setting</label>
             </th>
         </tr>
@@ -66,6 +72,7 @@
                     serverSide: true,
                     ajax: '{{ route("study.data") }}',
                     columns: [
+                        { data: 'id', name: 'id' },
                         { data: 'word', name: 'word' },
                         { data: 'persian', name: 'persian' ,orderable:false,searchable:false},
                         { data: 'setting', name: 'setting',orderable:false,searchable:false },

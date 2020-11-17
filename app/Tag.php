@@ -12,7 +12,7 @@ class Tag extends Model
     }
 
     public function scopeFindTag($query,$tag){
-        return $query->whereTag($tag);
+        return $query->whereTag($tag)->first();
     }
 
     public function scopeTagWords($query){
@@ -23,12 +23,17 @@ class Tag extends Model
         return $query->where('tag', 'like', $key.'%');
     }
 
+
+    //Defining Relationships
     public function words()
     {
         return $this->belongsToMany(Word::class);
     }
-
-    public function Sentences()
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class);
+    }
+    public function sentences()
     {
         return $this->belongsToMany(sentence::class);
     }

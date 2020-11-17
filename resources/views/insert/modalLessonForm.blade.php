@@ -18,6 +18,9 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <input type="text" class="form-control" id="tag" name="tag" placeholder="tags..." >
+                    </div>
+                    <div class="mb-3">
                         <input type="text" class="form-control" id="description" name="description" placeholder="description" required>
                     </div>
                     <button class="btn btn-outline-success  btn-block" type="submit">insert lesson</button>

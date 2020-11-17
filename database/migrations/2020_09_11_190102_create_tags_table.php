@@ -12,7 +12,6 @@ class CreateTagsTable extends Migration
             $table->id();
             $table->string('tag');
         });
-
         Schema::create('tag_word', function (Blueprint $table) {
             $table->unsignedBigInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
@@ -27,10 +26,18 @@ class CreateTagsTable extends Migration
             $table->foreign('sentence_id')->references('id')->on('sentences')->onDelete('cascade');
             $table->unique(['tag_id','sentence_id']);
         });
+        Schema::create('lesson_tag', function (Blueprint $table) {
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->unsignedBigInteger('lesson_id');
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            $table->unique(['tag_id','lesson_id']);
+        });
     }
     public function down(){
         Schema::dropIfExists('tag_word');
         Schema::dropIfExists('sentence_tag');
+        Schema::dropIfExists('lesson_tag');
         Schema::dropIfExists('tags');
     }
 }

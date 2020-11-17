@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-   {{-- @include('tags.listItem')--}}
-    <div class="row">
+    @include('tags.listItem')
+   <div class="row">
         <div class="col">
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="tagAll" role="tabpanel" aria-labelledby="all-tab">

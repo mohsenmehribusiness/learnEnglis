@@ -1,13 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 use App\Tag;
+use App\Traits\CacheTrait;
+use App\Traits\Tag\tagOrderTrait;
 use App\Traits\TagPrivateFunction;
 use App\Word;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    use TagPrivateFunction;
+    use TagPrivateFunction,CacheTrait,tagOrderTrait;
 
     public function index(){
         $objects=new Tag();
@@ -17,8 +19,17 @@ class TagController extends Controller
     }
 
     public function tag($tag){
-        $tag=Tag::FindTag($tag)->first();
-        $words=$tag->words()->paginate(20);
-        return view('study.index',compact('words'));
+        $routes=$this->setRoutes();
+        $this->setCacheQuery('newTagQuery',$tag);
+        $key='tag';
+        $query=$tag;
+        return view('study.index',compact('key','query','routes'));
+    }
+
+    public function indexTable()
+    {
+        $tags=Tag::paginate(15);
+        return $tags;
+        return view('lesson.indexShowTable');
     }
 }

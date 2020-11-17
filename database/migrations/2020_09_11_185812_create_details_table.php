@@ -20,6 +20,7 @@ class CreateDetailsTable extends Migration
             $table->boolean('state')->default(false);// یاد گرفتم - یاد نگرفتم
             $table->integer('star')->default(0);//تقسیم بندی بر اساس ستاره
             $table->integer('repeat')->default(0);// تعداد تکرار برای یاد گیری
+            //$table->unique(['foreign_id','usage']);
         });
     }
 

@@ -9,15 +9,17 @@ $(document).ready(function () {
             $(this).css('opacity','1');
         }
     });
-    settingHead.change(function(){
-        $(this).css('opacity','0.1');
-        if($(this).is( ":checked")){
-            $(this).css('opacity','1');
-        }
-    });
+
+
+
     $("#tableHoverPersian").change(function() {
-        $('.persian-td').each(function () {
-            $(this).toggleClass('persian-td-active');
+        $('#labelTableHoverPersian').toggleClass('bg-light');
+        $('.persian').each(function () {
+            let trueOrFalse=$(this).attr('data-hoverPersian');
+            if(trueOrFalse=="true")
+                $(this).attr('data-hoverPersian',false);
+            else if(trueOrFalse=="false")
+                $(this).attr('data-hoverPersian',true);
         });
     });
     //column setting
@@ -103,8 +105,7 @@ $(document).ready(function () {
     });
     //visible/hidden persiansWord
     $("#visiblePersian").click(function() {
-        $('#iconVisiblePersian').toggleClass('fa-eye-slash');
-        $('#iconVisiblePersian').toggleClass('fa-eye');
+        $('#iconVisiblePersian').toggleClass('fa-eye-slash fa-eye');
         $('.persian').each(function(){
             $(this).toggleClass('hide');
         });
@@ -117,5 +118,35 @@ $(document).ready(function () {
             $(this).toggleClass('hide');
         });
     });
-});
 
+    $("body").on('mouseenter','tr',function() {
+        let idTr=$(this).attr('id');
+        let first=$($(this)).first();
+        let idSpan=idTr+"_persianSpan";
+        let attributeHoverPersian=$("#"+idSpan).attr('data-hoverPersian');
+        if(attributeHoverPersian=="true") {
+            $("#" + idSpan).toggleClass('show hide');
+        }
+    });
+    $("body").on('mouseleave','tr',function() {
+        let idTr=$(this).attr('id');
+        let first=$($(this)).first();
+        let idSpan=idTr+"_persianSpan";
+        let attributeHoverPersian=$("#"+idSpan).attr('data-hoverPersian');
+        if(attributeHoverPersian=="true") {
+            $("#" + idSpan).toggleClass('hide show');
+        }
+    });
+    /******/
+    //visible/hidden setting words
+    settingHead.change(function(){
+        $(this).css('opacity','0.1');
+        if($(this).is( ":checked")){
+            $(this).css('opacity','1');
+        }
+        // hideshow all settings ...
+        $('.setting').each(function(){
+            $(this).toggleClass('hide');
+        });
+    });
+});

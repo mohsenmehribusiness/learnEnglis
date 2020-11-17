@@ -11,7 +11,7 @@ class Word extends Model
         return $query->whereWord($word);
     }
 
-    public function scopeStateCheck($query,$state=null){
+    public function scopeStateCheck($query,$state){
        if($state=='1')
            $query->whereHas('Detail', function($query) use ($state) {
                $query->where
@@ -31,19 +31,16 @@ class Word extends Model
        return $query;
     }
 
-    public function Lessons(){
+    // Defining Relationships ...
+    public function lessons(){
         return $this->belongsToMany(Lesson::class);}
-
-    public function Tags(){
+    public function tags(){
         return $this->belongsToMany(Tag::class);}
-
-    public function Persians(){
+    public function persians(){
         return $this->belongsToMany(Persian::class);}
-
-    public function Detail(){
+    public function detail(){
         return $this->hasOne(Detail::class, 'foreign_id');}
-
-    public function Sentences(){
+    public function sentences(){
         return $this->belongsToMany(sentence::class);
     }
 

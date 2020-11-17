@@ -7,6 +7,14 @@
         <a href="#moreChoose" data-toggle="collapse" class="text-muted px-3">
             <i class="fa fa-filter"></i>
         </a>
+        <!-- ok -->
+        <a href="{{route('study.change.choose',['choose'=>'sentences'])}}"  class="text-muted px-3">
+            <span class="text-danger">S</span>entence
+        </a>
+        <a href="{{ route('study.change.choose',['choose'=>'words']) }}"  class="text-muted px-3">
+            <span class="text-danger">W</span>ord
+        </a>
+        <!-- ok -->
     </div>
 </div>
 <br>
@@ -40,22 +48,22 @@
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route($routes["old"]) }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["old"])])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["old"],["$key"=>$query]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["old"],["$key"=>$query])])"></i>
                             Oldest</a>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route($routes["new"]) }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["new"])])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["new"],["$key"=>$query]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["new"],["$key"=>$query])])"></i>
                             Newest</a>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route($routes["stateTimes"]) }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["stateTimes"])])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["stateTimes"],["$key"=>$query]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["stateTimes"],["$key"=>$query])])"></i>
                             State
                             <i class="fa fa fa-times"></i>
                         </a>
@@ -63,8 +71,8 @@
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <a class="text-muted border-top" href="{{ route($routes["stateCheck"]) }}">
-                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["stateCheck"])])"></i>
+                        <a class="text-muted border-top" href="{{ route($routes["stateCheck"],["$key"=>$query]) }}">
+                            <i class="fa  @include('study.checkUrlAddFaIcon',['url'=>route($routes["stateCheck"],["$key"=>$query])])"></i>
                             State
                             <i class="fa fa fa-check"></i>
                         </a>

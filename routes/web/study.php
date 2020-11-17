@@ -2,6 +2,7 @@
 // index
 Route::get('','StudyController@index')->name('study.index');
 Route::get('/study-data','StudyController@AjaxQueryData')->name('study.data');
+
 //  old
 Route::get('/old','StudyController@old')->name('study.old');
 Route::get('/study-data-old','StudyController@AjaxQueryDataOld')->name('study.data.old');
@@ -15,6 +16,7 @@ Route::get('/study-data-state-check','StudyController@AjaxQueryDataStateCheck')-
 Route::get('/state-times','StudyController@StateTimes')->name('study.state.times');
 Route::get('/study-data-state-times','StudyController@AjaxQueryDataStateTimes')->name('study.data.state.times');
 
-Route::get('/study-data','StudyController@AjaxQueryData')->name('study.data');
-
 Route::post('/get-information-word','StudyController@getInformationWord')->name('study.get.information.word');
+
+
+Route::get('/change-choose/{choose}','StudyController@changeChoose')->name('study.change.choose');

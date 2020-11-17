@@ -3,8 +3,6 @@ namespace App\Traits;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-
-
 Trait PaginateTrait
 {
     /**
@@ -20,5 +18,4 @@ Trait PaginateTrait
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
-
 }

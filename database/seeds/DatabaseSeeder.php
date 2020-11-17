@@ -1,95 +1,110 @@
 <?php
-use App\Lesson;
-use App\Persian;
-use App\sentence;
-use App\Tag;
+
+use App\Traits\Insert\lessonInsertTrait;
+use App\Traits\Insert\sentenceInsertTrait;
+use App\Traits\Insert\wordInsertTrait;
 use App\Traits\PrivateFunctionInsert;
 use App\Traits\PrivateFunctionDbSeederTrait;
-use App\Word;
+use App\Traits\test\functionsDatabaseSeederTrait;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
-use Ybazli\Faker\Facades\Faker as PFaker;
 
 class DatabaseSeeder extends Seeder
 {
     public $faker;
-    use PrivateFunctionInsert,PrivateFunctionDbSeederTrait;
+    use wordInsertTrait;
+    use lessonInsertTrait;
+    use sentenceInsertTrait;
+    use functionsDatabaseSeederTrait;
+    use PrivateFunctionInsert;
+    use PrivateFunctionDbSeederTrait;
 
     public function __construct(Faker $faker)
     {
         $this->faker=$faker;
     }
 
-    private function CreateOneWord(){
-
+    # word
+    private function createInputsFakeForWord()
+    {
+        $inputs=[
+          "word"=>$this->getRandomEnglishWordOrSentence(),
+           "persian"=>$this->getRandomStringPersians(),
+           "tag"=>$this->getRandomStringTags(),
+           "sentence"=>$this->getRandomStringSentences(),
+           "lesson"=>$this->getRandomArrayIdLessons(),
+        ];
+        if(rand(0,1))
+            unset($inputs['tag']);
+         if(rand(0,1))
+            unset($inputs['lesson']);
+         if(rand(0,1))
+            unset($inputs['sentence']);
+         return $inputs;
+    }
+    public function createMultiWord($min,$max)
+    {
         $this->usage='word';
-
-        //save english word
-        $word=Word::firstOrCreate(['word'=>$this->getRandomEnglishWordOrSentence()]);
-
-        //save details
-        $word->Detail()->updateOrCreate(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
-
-        //set persians
-        $persians=$this->makeListId($this->getRandomArrayPersians(),new Persian(),'persian');
-        $word->Persians()->sync($persians);
-
-        //set sentences
-        if(rand(0,1))
-        {
-            $sentences=$this->makeListId($this->getRandomSentences(),new sentence(),'sentence');
-            $word->Sentences()->sync($sentences);
-        }
-
-        //set tags
-        if(rand(0,1)){
-            $tags=$this->makeListId($this->getRandomTags(),new Tag(),'tag');
-            $word->Tags()->sync($tags);
-        }
-
-        //save lessons
-        if(rand(0,1))
-            $word->Lessons()->sync($this->getRandomArrayIdLessons());
-    }
-
-    private function CreateOneLesson(){
-        Lesson::create(['lesson'=>$this->faker->word,'description'=>$this->faker->sentence]);
-    }
-
-    private function CreateOneSentence(){
-        $this->usage='sentence';
-        //save english word
-        $sentence=sentence::firstOrCreate(['sentence'=>$this->getRandomEnglishWordOrSentence()]);
-
-        //save details
-        $sentence->Detail()->updateOrCreate(['usage'=>$this->usage,'state'=>rand(0,1),'repeat'=>rand(1,12)]);
-
-        //set persian
-        if(rand(0,1)){
-            $persians=$this->makeListId($this->getRandomArrayPersians(),new Persian(),'persian');
-            $sentence->Persians()->sync($persians);
-        }
-
-        //set tags
-        if(rand(0,1)){
-            $tags = $this->makeListId($this->getRandomTags(), new Tag(), 'tag');
-            $sentence->Tags()->sync($tags);
-        }
-        //save lesson
-        if(rand(0,1))
-            $sentence->Lessons()->sync($this->getRandomArrayIdLessons());
-    }
-
-    private function CreateMultiThings($min,$max,$function){
         for($i=0;$i<$this->getRandomNumber($min,$max);$i++)
-            $this->$function();
+        {
+            $inputs=$this->createInputsFakeForWord();
+            $this->saveWord($inputs);
+        }
     }
 
+    # lesson
+    private function createInputsFakeForLesson()
+    {
+        $lesson=[
+          'lesson'=>$this->faker->word,
+          'description'=>$this->faker->sentence,
+          'lesson'=>$this->faker->word,
+          'tag'=>$this->getRandomStringTags()
+        ];
+        if(rand(0,1))
+            unset($lesson['tag']);
+        return $lesson;
+    }
+    public function createMultiLesson($min,$max)
+    {
+        $this->usage='word';
+        for($i=0;$i<$this->getRandomNumber($min,$max);$i++)
+        {
+            $inputs=$this->createInputsFakeForLesson();
+            $this->saveLesson($inputs);
+        }
+    }
+
+    # sentence
+    private function createInputsFakeForSentence()
+    {
+        $inputs=[
+            "sentence"=>$this->getRandomEnglishWordOrSentence(),
+            "persian"=>$this->getRandomStringPersians(),
+            "tag"=>$this->getRandomStringTags(),
+            "lesson"=>$this->getRandomArrayIdLessons(),
+        ];
+        if(rand(0,1))
+            unset($inputs['tag']);
+        if(rand(0,1))
+            unset($inputs['lesson']);
+        return $inputs;
+    }
+    public function createMultiSentence($min,$max)
+    {
+        $this->usage='sentence';
+        for($i=0;$i<$this->getRandomNumber($min,$max);$i++)
+        {
+            $inputs=$this->createInputsFakeForSentence();
+            $this->saveSentence($inputs);
+        }
+    }
     public function run(Faker $faker)
     {
-      //factory(App\User::class, 15)->create();
-      $this->CreateMultiThings(15,35,'CreateOneLesson');
-      $this->CreateMultiThings(65,90,'CreateOneWord');
-      $this->CreateMultiThings(65,70,'CreateOneSentence');
+      # factory(App\User::class, 15)->create();
+      # $this->CreateMultiThings(165,170,'CreateOneSentence');
+      $this->createMultiLesson(15,25);
+      $this->createMultiWord(100,250);
+      $this->createMultiSentence(100,250);
     }
 }

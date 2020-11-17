@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 trait PrivateFunctionInsert
 {
-    public $usage=null;
+    public $usage='word';
 
     /**
      * @param Request $request
@@ -41,13 +41,15 @@ trait PrivateFunctionInsert
 
     private function createOrExist($object,$modal,$key){
         return (($find=$modal::where($key,$object)->first())? $object=$find : $object=$modal::create(["{$key}"=>$object]))->id;
+        //return ($modal::firstOrCreate(["{$key}"=>$object]))->id;
     }
 
     private function makeListId($objects,$modal,$key){
         $list=array();
-        foreach($objects as $object)
-            array_push($list,$this->createOrExist($object,$modal,$key));
+        foreach($objects as $object) {
+            //array_push($list, $this->createOrExist($object, $modal, $key));
+            array_push($list,($modal::firstOrCreate(["{$key}"=>$object]))->id);
+        }
         return $list;
     }
-
 }

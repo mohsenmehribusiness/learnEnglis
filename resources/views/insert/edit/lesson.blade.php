@@ -1,7 +1,19 @@
 @extends('layouts.master')
+@section('css')
+    <style>
+        .boxxx-shadow{
+            -webkit-box-shadow: 5px 9px 5px -6px rgba(255,192,84,1);
+            -moz-box-shadow: 5px 9px 5px -6px rgba(255,192,84,1);
+            box-shadow: 5px 9px 5px -6px rgba(255,192,84,1);;
+        }
+    </style>
+@endsection
 
 @section('content')
     <div class="row">
+        <h5>edit word : </h5>
+    </div>
+    <div class="row boxxx-shadow rounded border border-warning">
         <div class="col">
             <form class="@error('lesson') was-validated @enderror form mt-5" action="{{ route('insert.lesson')}}" method="POST" novalidate>
                 @csrf
@@ -27,8 +39,4 @@
 @endsection
 
 @section('script')
-    <script src="{{ url('plugins/ckeditor/ckeditor.js') }}"></script>
-    $(document).ready(function(){
-        CKEditor.replace('description');
-    });
 @endsection

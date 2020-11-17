@@ -14,7 +14,7 @@ interface OrderInterface
     /**
      * @return mixed
      */
-    public  function  old($vlue=null);
+    public  function  old($value=null);
 
     /**
      * @return mixed

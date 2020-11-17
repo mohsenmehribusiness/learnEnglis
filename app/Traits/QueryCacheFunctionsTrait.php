@@ -1,9 +1,6 @@
 <?php
 
-
 namespace App\Traits;
-
-
 trait QueryCacheFunctionsTrait
 {
     public function setQuery($query){

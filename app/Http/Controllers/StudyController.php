@@ -1,14 +1,19 @@
 <?php
 namespace App\Http\Controllers;
-use App\Detail;
-use App\Http\Controllers\Interfaces\OrderInterface;
-use App\Traits\StudyOrder;
-use App\Word;
+use App\Traits\CacheTrait;
+use App\Traits\Lesson\lessonQueryTrait;
+use App\Traits\Tag\tagQueryOrder;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class StudyController  extends Controller implements OrderInterface{
-    use StudyOrder;
+class StudyController  extends Controller{
+    use CacheTrait,lessonQueryTrait,tagQueryOrder;
+
+    public function __construct()
+    {
+        $this->choose=$this->getChooseInCache();
+    }
+
     public function index(){
         $this->setRoutes();
         $this->routes["ajax"]="study.data";
@@ -17,9 +22,11 @@ class StudyController  extends Controller implements OrderInterface{
     }
 
     public function AjaxQueryData(Request $request){
-        return Datatables::of(Word::query())
-            ->addColumn('persian', function(Word $word){return view('study.yajra.persianColumn',compact('word'));})
-            ->addColumn('setting', function(Word $word){return view('study.yajra.settingColumn',compact('word'));})
+        $choose=rtrim($this->choose,"s");
+        return Datatables::of($this->runQuery())
+            ->addColumn('persian', function($word){return view('study.yajra.persianColumn',compact('word'));})
+            ->addColumn('setting', function($word)use($choose){return view('study.yajra.settingColumn',compact('word','choose'));})
+            ->setRowId('id')
             ->make(true);
     }
 }

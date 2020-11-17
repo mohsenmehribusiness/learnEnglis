@@ -10,17 +10,20 @@ class Lesson extends Model
     public function scopeLessonStartLetter($query, $key){
         return $query->where('lesson', 'like', $key.'%');
     }
-
     public function scopeFindLesson($query,$lesson){
-        return $query->whereLesson($lesson);
+        return $query->whereLesson($lesson)->first();
     }
 
+    // Defining Relationships ...
     public function words()
     {
         return $this->belongsToMany(Word::class);
     }
-
-    public function Sentences()
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+    public function sentences()
     {
         return $this->belongsToMany(sentence::class);
     }

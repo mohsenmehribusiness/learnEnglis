@@ -1,36 +1,30 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
-
 class sentence extends Model
 {
-    protected $fillable=['sentence'];
+    protected $fillable=['word'];
     public $timestamps=false;
 
-    public function Lessons()
+    public function scopeStateCheck($query,$state){
+        return $query->whereHas('Detail', function($query) use ($state) {$query->whereState($state)->where('usage','sentence');});
+    }
+
+    // Defining Relationships ...
+    public function lessons()
     {
         return $this->belongsToMany(Lesson::class);
     }
-
-    public function Tags()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
-
-    public function Persians(){
+    public function persians(){
         return $this->belongsToMany(Persian::class);
     }
-
-    public function Detail(){
+    public function detail(){
         return $this->hasOne(Detail::class, 'foreign_id');
     }
-
-    public function scopeStateCheck($query,$state){
-        return $query->whereHas('Detail', function($query) use ($state) {$query->whereState($state);});
-    }
-
     public function words()
     {
         return $this->belongsToMany(Word::class);

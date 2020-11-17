@@ -1,17 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-use App\Http\Controllers\Interfaces\OrderInterface;
+use App\Traits\Lesson\lessonOrderTrait;
 use App\Lesson;
-use App\Traits\LessonOrder;
+use App\Traits\CacheTrait;
 use App\Traits\TagPrivateFunction;
-use App\Word;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
-class LessonController extends Controller implements OrderInterface
-{
-    use TagPrivateFunction,LessonOrder;
+class LessonController extends Controller {
+    use TagPrivateFunction,CacheTrait,lessonOrderTrait;
 
     public function index(){
         $objects=new Lesson();
@@ -21,9 +16,17 @@ class LessonController extends Controller implements OrderInterface
     }
 
     public function lesson($lesson){
+        $routes=$this->setRoutes();
+        $this->setCacheQuery('newLessonQuery',$lesson);
+        $key='lesson';
+        $query=$lesson;
+        return view('study.index',compact('key','query','routes'));
+    }
 
-        $lesson=Lesson::FindLesson($lesson)->first();
-        $words=$lesson->words()->paginate(20);
-        return view('study.index',compact('words'));
+    public function indexTable()
+    {
+        $objects=Lesson::paginate(15);
+        $general='lesson';
+        return view('tags.indexShowTable',compact('objects','general'));
     }
 }

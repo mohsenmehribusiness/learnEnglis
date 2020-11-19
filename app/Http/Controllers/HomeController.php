@@ -7,7 +7,7 @@ class HomeController extends Controller
     use PrivateFunctionHomeControllerTrait;
     public function index(){
        $details=$this->getDetails();
-        $icons=$this->getIcons();
-        return view('home.index',compact('details','icons'));
+       $icons=$this->getIcons();
+       return view('home.index',compact('details','icons'));
     }
 }

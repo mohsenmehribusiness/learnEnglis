@@ -4,6 +4,7 @@ use App\Traits\Lesson\lessonOrderTrait;
 use App\Lesson;
 use App\Traits\CacheTrait;
 use App\Traits\TagPrivateFunction;
+use Illuminate\Http\Request;
 
 class LessonController extends Controller {
     use TagPrivateFunction,CacheTrait,lessonOrderTrait;
@@ -28,5 +29,11 @@ class LessonController extends Controller {
         $objects=Lesson::paginate(15);
         $general='lesson';
         return view('tags.indexShowTable',compact('objects','general'));
+    }
+
+    public function lessonInfo(Request $request)
+    {
+        $lesson=Lesson::find($request->id);
+        return response()->json(array('lesson'=>$lesson->lesson,'description'=>$lesson->description),200);
     }
 }

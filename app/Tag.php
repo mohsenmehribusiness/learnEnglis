@@ -11,6 +11,12 @@ class Tag extends Model
         return $query->whereUsage('sentence');
     }
 
+    public function __destruct()
+    {
+        ///delete tag
+
+    }
+
     public function scopeFindTag($query,$tag){
         return $query->whereTag($tag)->first();
     }

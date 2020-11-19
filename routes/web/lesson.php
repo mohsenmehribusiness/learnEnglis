@@ -2,8 +2,8 @@
 Route::get('','LessonController@index')->name('lesson.index');
 Route::get('/in-table','LessonController@indexTable')->name('lesson.table.index');
 Route::get('{lesson}','LessonController@lesson')->name('lesson.lesson');
+Route::post('info','LessonController@lessonInfo')->name('lesson.info');
 Route::get('lesson-data','LessonController@AjaxQueryData')->name('lesson.data');
-
 //  old
 Route::get('/old/{lesson}','LessonController@old')->name('lesson.old');
 //  new

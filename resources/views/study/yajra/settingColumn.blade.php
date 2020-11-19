@@ -5,7 +5,7 @@
 <a onclick="getInformationWord({{ $word->id }})" class="px-1 cursor_pointer" data-toggle="modal" data-target=".bd-example-modal-lg">
     <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
 </a>
-<a href='{{route("insert.$choose.edit.get",['word'=>$word])}}' class="px-1 cursor_pointer">
+<a href='{{route("insert.$choose.edit.get",["word"=>$word])}}' class="px-1 cursor_pointer">
     <i class="fa fa-pencil-square-o text-warning" aria-hidden="true"></i>
 </a>
 </span>

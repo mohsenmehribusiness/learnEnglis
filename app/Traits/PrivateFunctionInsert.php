@@ -12,6 +12,11 @@ trait PrivateFunctionInsert
 {
     public $usage='word';
 
+    public function setUsage($usage)
+    {
+        $this->usage=$usage;
+    }
+
     /**
      * @param Request $request
      * @return array
@@ -31,7 +36,7 @@ trait PrivateFunctionInsert
     }
 
     private function explodeArray($var){
-        return explode('-',$var);
+        return $var ? array_map('trim', explode('-',$var)) : null;
     }
 
     private function SaveOneToMany($modal,$items,$relation,$type){
@@ -46,6 +51,8 @@ trait PrivateFunctionInsert
 
     private function makeListId($objects,$modal,$key){
         $list=array();
+        if(!$objects)
+            return null;
         foreach($objects as $object) {
             //array_push($list, $this->createOrExist($object, $modal, $key));
             array_push($list,($modal::firstOrCreate(["{$key}"=>$object]))->id);

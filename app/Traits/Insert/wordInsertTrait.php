@@ -65,4 +65,42 @@ trait wordInsertTrait
         alert('words saved','done');
         return back();
     }
+
+    ############
+    // edit word
+    public function editWordGet(Word $word)
+    {
+        return view('insert.edit.word',compact('word'));
+    }
+    public function editWordPost(Request $request)
+    {
+        //return $request->all();
+        $inputs=$this->makeInputs($request);
+        $this->editWord($inputs);
+        alert('edit done','done');
+        return redirect()->route('home');
+    }
+    public function editWord($inputs)
+    {
+        $this->setUsage('word');
+        if(!$inputs['word'])
+            return null;
+        //edit word
+        $word=Word::find($inputs['id']);
+        $word->update(['word'=>$inputs['word']]);
+        //edit persian
+        $persians=$this->makeListId($this->explodeArray($inputs['persian']),new Persian(),'persian');
+        $word->persians()->sync($persians);
+        //edit tag
+        $tags=$this->makeListId($this->explodeArray($inputs['tag']),new Tag(),'tag');
+        $word->tags()->sync($tags);
+        //edit sentence
+        $sentences=$this->makeListId($this->explodeArray($inputs['sentence']),new sentence(),'word');
+        $word->sentences()->sync($sentences);
+        //edit lessons
+        $lessons = isset($inputs['lesson']) ? $inputs['lesson'] : null;
+        $word->lessons()->sync($lessons);
+        return $word;
+    }
+    // edit word
 }

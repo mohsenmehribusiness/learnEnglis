@@ -4,6 +4,9 @@ Route::get('','TagController@index')->name('tag.index');
 Route::get('/in-table','TagController@indexTable')->name('tag.table.index');
 Route::get('/{tag}','TagController@tag')->name('tag.tag');
 
+Route::post('info','TagController@tagInfo')->name('tag.info');
+
+
 //  old
 Route::get('/old/{tag}','TagController@old')->name('tag.old');
 //  new

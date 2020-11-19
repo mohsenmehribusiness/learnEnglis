@@ -4,8 +4,6 @@ use App\Tag;
 use App\Traits\CacheTrait;
 use App\Traits\Tag\tagOrderTrait;
 use App\Traits\TagPrivateFunction;
-use App\Word;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -28,8 +26,8 @@ class TagController extends Controller
 
     public function indexTable()
     {
-        $tags=Tag::paginate(15);
-        return $tags;
-        return view('lesson.indexShowTable');
+        $objects=Tag::paginate(15);
+        $general='tag';
+        return view('tags.indexShowTable',compact('objects','general'));
     }
 }

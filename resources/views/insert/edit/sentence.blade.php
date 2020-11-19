@@ -1,57 +1,79 @@
-<ul class="list-group mb-3">
-    <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-            <a href="{{ route('word.index') }}">
-                <h6 class="my-0">Word,s</h6>
-            </a>
-        </div>
-        <span class="text-muted">{{ $details['wordCount'] }}</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-            <a href="{{ route('sentence.index') }}">
-                <h6 class="my-0">Sentences</h6>
-            </a>
-        </div>
-        <span class="text-muted">{{ $details['sentenceCount'] }}</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-            <a href="{{ route('tag.index') }}">
-                <h6 class="my-0">Tags</h6>
-            </a>
-        </div>
-        <span class="text-muted">{{ $details['tags']  }}</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-            <a href="{{ route('lesson.index') }}">
-                <h6 class="my-0">Lessons</h6>
-            </a>
-        </div>
-        <span class="text-muted">{{ $details['lessons']  }}</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between bg-light">
-        <div class="text-success">
-            <h6 class="my-0">RepeatAll</h6>
-        </div>
-        <span class="text-success">{{ $details['repeat'] }}</span>
-    </li>
-    {{--<li class="list-group-item d-flex justify-content-between">
-        <span>جمع (تومان)</span>
-        <strong>$20</strong>
-    </li>--}}
-</ul>
-<ul class="list-group mb-3">
+@extends('layouts.master')
 
-    <li class="list-group-item border-white">
-        <span class="text-primary">insert</span>
-        <br>
-        <a class="text-primary cursor_pointer pl-5" id="insert_lesson" data-toggle="modal" data-target="#insert_lesson_modal"> Lesson</a>
-        <br>
-        <a class="text-primary cursor_pointer pl-5" href="{{ route('insert.multi.word') }}"> MultiWord</a>
-        <br>
-        <a class="text-primary cursor_pointer pl-5" href="{{ route('insert.multi.sentence') }}"> MultiSentence</a>
-    </li>
-</ul>
-<!-- Trigger the modal with a button -->
+@section('css')
+    <style>
+        .boxxx-shadow{
+            -webkit-box-shadow: 5px 9px 5px -6px rgba(255,192,84,1);
+            -moz-box-shadow: 5px 9px 5px -6px rgba(255,192,84,1);
+            box-shadow: 5px 9px 5px -6px rgba(255,192,84,1);;
+        }
+    </style>
+    <!-- bootstrap-multiSelect -->
+    <link rel="stylesheet" href="{{ url('css/bootstrap-select.min.css') }}">
+    <!-- bootstrap-multiSelect -->
+@endsection
+
+@section('content')
+    <div class="row">
+        <h5>edit Sentence</h5>
+    </div>
+    <div class="row boxxx-shadow rounded border border-warning">
+        <div class="col">
+            <form class="@error('word') was-validated @enderror @error('persian') was-validated @enderror pt-5 pb-5"
+                  action="{{ route('insert.sentence.edit.post',['word'=>$word])}}" method="POST" novalidate>
+                @csrf
+                <input type="number" style="visibility:hidden !important;" name="id" value="{{ $word->id }}">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="word" name="word" placeholder="english" value="{{ $word->word }}" required>
+                        @error('word')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="persian" value="{{setValueArray($word,'persians')}}" name="persian" placeholder="persian words..." required>
+                    @error('persian')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="tag" name="tag" value="{{setValueArray($word,'tags')}}" placeholder="tags..." >
+                </div>
+                <div class="mb-3">
+                    <select class="my-select selectpicker" name="lesson[]"  data-live-search="true" data-size="3"  multiple>
+                        <option hidden >Display but don't show in list</option>
+                        @php $lessons=\App\Lesson::all();  @endphp
+                        @foreach($lessons as $lesson)
+                            <option value="{{$lesson->id}}" {{($word->lessons()->pluck('id'))->contains($lesson->id) ? 'selected' : null }} data-tokens="{{ $lesson->lesson }}">
+                                {{ $lesson->lesson }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <!-- more .. -->
+                <hr class="mb-4">
+                <button class="btn btn-outline-warning btn-lg btn-block" type="submit">edit</button>
+            </form>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        $('.my-select') .selectpicker({dropupAuto: false});
+    </script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{{ url('js/bootstrap-select.min.js') }}"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
+    <script>
+        @error('lesson')
+        $('#insert_lesson_modal').modal('show');
+        @enderror
+    </script>
+@endsection

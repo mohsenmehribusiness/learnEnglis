@@ -56,4 +56,37 @@ trait sentenceInsertTrait
         alert('sentences saved','done');
         return back();
     }
+    ################
+    // edit sentence
+    public function editSentenceGet(sentence $word)
+    {
+        return view('insert.edit.sentence',compact('word'));
+    }
+    public function editSentencePost(Request $request)
+    {
+        //return $request->all();
+        $inputs=$this->makeInputs($request);
+        $this->editSentence($inputs);
+        alert('edit sentence done','done');
+        return redirect()->route('home');
+    }
+    public function editSentence($inputs){
+        $this->setUsage('sentence');
+        if(!$inputs['word'])
+            return null;
+        //save english sentence
+        $sentence=sentence::find($inputs['id']);
+        $sentence->update(['word'=>$inputs['word']]);
+        //edit persian
+        $persians=$this->makeListId($this->explodeArray($inputs['persian']),new Persian(),'persian');
+        $sentence->persians()->sync($persians);
+        //edit tag
+        $tags=$this->makeListId($this->explodeArray($inputs['tag']),new Tag(),'tag');
+        $sentence->tags()->sync($tags);
+        //edit lessons
+        $lessons = isset($inputs['lesson']) ? $inputs['lesson'] : null;
+        $sentence->lessons()->sync($lessons);
+        return $sentence;
+    }
+    // edit sentence
 }

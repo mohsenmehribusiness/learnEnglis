@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Traits\CacheTrait;
+use App\Traits\Cache\CacheTrait;
 use App\Traits\Word\WordAjaxFunctionTrait;
 use App\Traits\Word\WordOrderTrait;
 use App\Word;

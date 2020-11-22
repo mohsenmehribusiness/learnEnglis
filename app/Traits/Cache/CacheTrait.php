@@ -1,15 +1,10 @@
 <?php
-namespace App\Traits;
+namespace App\Traits\Cache;
 use App\Word;
 use Illuminate\Support\Facades\Cache;
 trait CacheTrait
 {
     public $choose;
-    /**
-     * @param $nameFunction
-     * @param $filter
-     * @return bool
-     */
     public function setCacheQuery($nameFunction,$filter=null)
     {
         return Cache::store('file')->put('query',['nameFunction'=>$nameFunction,'filter'=>$filter,'choose'=>$this->getChooseInCache()]); // 10 Minutes
@@ -32,17 +27,14 @@ trait CacheTrait
     public function getFilterInCache(){
         return $this->getCacheQuery()["filter"];
     }
-
     public function getChooseInCache()
     {
         return $this->getCacheQuery()["choose"]??"words";
     }
-
     public function setChoose()
     {
         $this->choose=$this->getCacheQuery()["choose"] ?? "words";
     }
-
     public function changeChoose($choose)
     {
         Cache::store('file')->put('query',
@@ -53,7 +45,6 @@ trait CacheTrait
             ]);
         return back();
     }
-
     public function runQuery(){
         $this->setChoose();
         $nameFunction=$this->getNameFunctionInCache();

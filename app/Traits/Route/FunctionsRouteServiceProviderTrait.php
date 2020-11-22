@@ -1,75 +1,60 @@
 <?php
-
-
-namespace App\Traits;
-
-
+namespace App\Traits\Route;
 use Illuminate\Support\Facades\Route;
-
 trait FunctionsRouteServiceProviderTrait
 {
-
-    public function mapTranslateRoutes() {
+    public function mapTranslateRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('translate')
             ->group(base_path('routes/web/translate.php'));
     }
-
-    public function mapTagRoutes() {
+    public function mapTagRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('tags')
             ->group(base_path('routes/web/tag.php'));
     }
-
-    public function mapLessonRoutes() {
+    public function mapLessonRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('lessons')
             ->group(base_path('routes/web/lesson.php'));
     }
-
-    public function mapExamRoutes() {
+    public function mapExamRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('exam')
             ->group(base_path('routes/web/exam.php'));
     }
-
-    public function mapInsertRoutes() {
+    public function mapInsertRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('insert')
             ->group(base_path('routes/web/insert.php'));
     }
-
-    public function mapStudyRoutes() {
+    public function mapStudyRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('study')
             ->group(base_path('routes/web/study.php'));
     }
-
-    public function mapQaRoutes() {
+    public function mapQaRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('qa')
             ->group(base_path('routes/web/qa.php'));
     }
-
-    public function mapWordRoutes() {
+    public function mapWordRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('word')
             ->group(base_path('routes/web/word.php'));
     }
-
-    public function mapSentenceRoutes() {
+    public function mapSentenceRoutes(){
         Route::middleware('web')
             ->namespace($this->namespace)
             ->prefix('sentence')
             ->group(base_path('routes/web/sentence.php'));
     }
 }
-

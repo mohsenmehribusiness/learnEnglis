@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Traits\PrivateFunctionExamTrait;
+use App\Traits\Exam\PrivateFunctionExamTrait;
 use Illuminate\Http\Request;
 class ExamController extends Controller
 {

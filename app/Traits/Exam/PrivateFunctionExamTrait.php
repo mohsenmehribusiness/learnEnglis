@@ -1,16 +1,12 @@
 <?php
-
-
-namespace App\Traits;
-
-
+namespace App\Traits\Exam;
 use App\sentence;
 use App\Word;
 
 trait PrivateFunctionExamTrait
 {
     private function CreateQuestionList($lists){
-        
+
     }
 
     private function checkOption($option,$number){

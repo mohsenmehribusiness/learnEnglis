@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Providers;
-
-use App\Traits\FunctionsRouteServiceProviderTrait;
+use App\Traits\Route\FunctionsRouteServiceProviderTrait;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-
 class RouteServiceProvider extends ServiceProvider
 {
     use FunctionsRouteServiceProviderTrait;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Traits;
+namespace App\Traits\Seeder;
 use Faker\Generator as Faker;
 use Ybazli\Faker\Facades\Faker as PFaker;
 use App\Lesson;

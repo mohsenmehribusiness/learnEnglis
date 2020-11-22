@@ -1,12 +1,11 @@
 <?php
 namespace App\Http\Controllers;
-use App\Traits\CacheTrait;
+use App\Traits\Cache\CacheTrait;
 use App\Traits\Lesson\lessonQueryTrait;
 use App\Traits\Sentence\SentenceQueryTrait;
 use App\Traits\Study\AjaxQueryDataTrait;
 use App\Traits\Tag\tagQueryTrait;
 use App\Traits\Word\wordQueryTrait;
-
 class StudyController  extends Controller{
     use CacheTrait;
     use lessonQueryTrait;

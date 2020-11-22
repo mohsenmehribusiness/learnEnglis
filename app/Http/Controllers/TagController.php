@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 use App\Tag;
-use App\Traits\CacheTrait;
+use App\Traits\Cache\CacheTrait;
 use App\Traits\Tag\tagOrderTrait;
-use App\Traits\TagPrivateFunction;
+use App\Traits\TagOrLessonPrivateFunction;
 
 class TagController extends Controller
 {
-    use TagPrivateFunction,CacheTrait,tagOrderTrait;
+    use TagOrLessonPrivateFunction,CacheTrait,tagOrderTrait;
     public function index()
     {
         $objects=Tag::paginate(15);

@@ -1,10 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Traits\Translate;
-use Illuminate\Http\Request;
-
+use App\Traits\Translate\Translate;
 class TranslateController extends Controller
 {
     use Translate;

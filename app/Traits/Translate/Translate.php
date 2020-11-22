@@ -1,10 +1,7 @@
 <?php
-
-namespace App\Traits;
-
+namespace App\Traits\Translate;
 use Illuminate\Http\Request;
 use Stichoza\GoogleTranslate\GoogleTranslate;
-
 trait Translate
 {
     public function translatePost(Request $request){

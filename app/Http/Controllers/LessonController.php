@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers;
+use App\Traits\Cache\CacheTrait;
 use App\Traits\Lesson\lessonOrderTrait;
 use App\Lesson;
-use App\Traits\CacheTrait;
-use App\Traits\TagPrivateFunction;
+use App\Traits\TagOrLessonPrivateFunction;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller {
-    use TagPrivateFunction,CacheTrait,lessonOrderTrait;
+    use TagOrLessonPrivateFunction,CacheTrait,lessonOrderTrait;
     public function index()
     {
         $objects=Lesson::paginate(15);

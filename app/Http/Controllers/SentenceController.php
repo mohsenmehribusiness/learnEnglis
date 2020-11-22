@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use App\sentence;
-use App\Traits\CacheTrait;
+use App\Traits\Cache\CacheTrait;
 use App\Traits\Sentence\SentenceOrderTrait;
-use App\Traits\Word\WordOrderTrait;
-use Illuminate\Http\Request;
 class SentenceController extends Controller
 {
     use CacheTrait;

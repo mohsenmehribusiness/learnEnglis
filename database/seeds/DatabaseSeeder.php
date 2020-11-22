@@ -1,15 +1,13 @@
 <?php
-
 use App\Traits\Insert\lessonInsertTrait;
 use App\Traits\Insert\sentenceInsertTrait;
 use App\Traits\Insert\wordInsertTrait;
 use App\Traits\PrivateFunctionInsert;
-use App\Traits\PrivateFunctionDbSeederTrait;
 use App\Traits\Qa\QaInsertTrait;
+use App\Traits\Seeder\PrivateFunctionDbSeederTrait;
 use App\Traits\test\functionsDatabaseSeederTrait;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
     public $faker;

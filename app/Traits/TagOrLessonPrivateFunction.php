@@ -1,7 +1,6 @@
 <?php
 namespace App\Traits;
-
-trait TagPrivateFunction
+trait TagOrLessonPrivateFunction
 {
     private function productLetters(){
         $letters=array();

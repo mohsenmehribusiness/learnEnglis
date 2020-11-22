@@ -11,16 +11,14 @@ trait lessonOrderTrait
         $this->routes["stateTimes"]="lesson.state.times";
         return $this->routes;
     }
-
     public function old($lesson)
     {
         $routes=$this->setRoutes();
         $this->setCacheQuery('oldLessonQuery',$lesson);
         $key='lesson';
         $query=$lesson;
-        return view('lessons.index',compact('key','query','routes'));
+        return view('study.index',compact('key','query','routes'));
     }
-
     public function new($lesson)
     {
         $routes=$this->setRoutes();
@@ -29,7 +27,6 @@ trait lessonOrderTrait
         $query=$lesson;
         return view('study.index',compact('key','query','routes'));
     }
-
     public function stateCheck($lesson)
     {
         $routes=$this->setRoutes();
@@ -38,7 +35,6 @@ trait lessonOrderTrait
         $query=$lesson;
         return view('study.index',compact('key','query','routes'));
     }
-
     public function stateTimes($lesson)
     {
         $routes=$this->setRoutes();

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+    @include('tags.listItem')
     <div class="row">
         <table class="table" id="studyTable">
             <thead>
@@ -26,12 +27,12 @@
                             {{ $object->$general }}
                         </td>
                         <td class="text-center">
-                            <a href='{{ route("$general.$general",["$general"=>$object->$general]) }}'>
+                            <a href='{{ route("$general.sentence.$general",["$general"=>$object->$general]) }}'>
                                 {{ $object->sentences()->count() }}
                             </a>
                         </td>
                         <td class="text-center">
-                            <a href='{{ route("$general.$general",["$general"=>$object->$general]) }}'>
+                            <a href='{{ route("$general.word.$general",["$general"=>$object->$general]) }}'>
                                 {{ $object->words()->count() }}
                             </a>
                         </td>
@@ -56,7 +57,7 @@
     <!-- modal information -->
     <!-- Modal -->
     <div class="modal fade" id="insert_lesson_modal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div id="lessonInModal" class="modal-header">
                 </div>

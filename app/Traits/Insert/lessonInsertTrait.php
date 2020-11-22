@@ -7,10 +7,10 @@ trait lessonInsertTrait
 {
     public function saveLesson($inputs)
     {
-        $lesson=Lesson::updateOrCreate([
+        $lesson=Lesson::firstOrCreate([
             'lesson'=>$inputs['lesson'],
-            'description'=>$inputs['description']
         ]);
+        $lesson->update(['description'=>$inputs['description']]);
         //save tags
         if(isset($inputs['tag'])){
             $tags=$this->makeListId($this->explodeArray($inputs['tag']),new Tag(),'tag');
@@ -38,7 +38,7 @@ trait lessonInsertTrait
         $inputs=$this->makeInputs($request);
         $this->editLesson($inputs);
         alert('edit lesson done','done');
-        return redirect()->route('home');
+        return redirect()->route('lesson.table.index');
     }
     public function editLesson($inputs)
     {
@@ -51,5 +51,4 @@ trait lessonInsertTrait
         $lesson->tags()->sync($tags);
     }
     // edit lesson
-
 }

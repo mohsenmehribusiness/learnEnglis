@@ -52,6 +52,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapLessonRoutes();
         $this->mapSentenceRoutes();
         $this->mapStudyRoutes();
+        $this->mapQaRoutes();
         $this->mapTranslateRoutes();
         $this->mapWordRoutes();
         $this->mapExamRoutes();

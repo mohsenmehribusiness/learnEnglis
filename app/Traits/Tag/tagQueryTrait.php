@@ -2,7 +2,7 @@
 namespace App\Traits\Tag;
 use App\Tag;
 
-trait tagQueryOrder
+trait tagQueryTrait
 {
     public function newTagQuery($filter){
         $choose=$this->choose;

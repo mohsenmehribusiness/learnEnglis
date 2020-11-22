@@ -2,7 +2,6 @@
     @foreach($word->persians()->get() as $persian)
         <span>
             {{ $persian->persian }}
-
             @if(!$loop->last)
             ,
             @endif

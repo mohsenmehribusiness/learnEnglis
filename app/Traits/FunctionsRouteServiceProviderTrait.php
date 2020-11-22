@@ -51,6 +51,13 @@ trait FunctionsRouteServiceProviderTrait
             ->group(base_path('routes/web/study.php'));
     }
 
+    public function mapQaRoutes() {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->prefix('qa')
+            ->group(base_path('routes/web/qa.php'));
+    }
+
     public function mapWordRoutes() {
         Route::middleware('web')
             ->namespace($this->namespace)

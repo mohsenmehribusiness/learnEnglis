@@ -1,13 +1,11 @@
 <?php
 namespace App\Http\Controllers;
-use App\Traits\PrivateFunctionHomeControllerTrait;
-use App\Traits\QueryCacheFunctionsTrait;
+use App\Traits\getDetailsTrait;
 class HomeController extends Controller
 {
-    use PrivateFunctionHomeControllerTrait;
+    use getDetailsTrait;
     public function index(){
        $details=$this->getDetails();
-       $icons=$this->getIcons();
-       return view('home.index',compact('details','icons'));
+       return view('home.index',compact('details'));
     }
 }

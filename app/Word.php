@@ -12,6 +12,21 @@ class Word extends Model
     }
 
     public function scopeStateCheck($query,$state){
+        return $state=='1' ? $query->whereHas('Detail', function($query) use ($state) {
+            $query->where
+            ([
+                ['state', '=',1],
+                ['usage', '=', 'word'],
+            ]);
+        }) :
+            $query->whereHas('Detail', function($query) use ($state) {
+                $query->where
+                ([
+                    ['state', '=',0],
+                    ['usage', '=', 'word'],
+                ]);
+            });
+        /*
        if($state=='1')
            $query->whereHas('Detail', function($query) use ($state) {
                $query->where
@@ -28,8 +43,10 @@ class Word extends Model
                    ['usage', '=', 'word'],
                ]);
            });
-       return $query;
+       return $query;*/
     }
+
+
 
     // Defining Relationships ...
     public function lessons(){

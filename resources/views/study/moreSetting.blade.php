@@ -45,6 +45,7 @@
     </div>
     <div class="col">
         <div id="moreChoose" style="font-size:0.9rem;"  class="collapse">
+         @if(isset($routes))
             <div class="row">
                 <div class="col">
                     <div class="form-check">
@@ -78,8 +79,8 @@
                         </a>
                     </div>
                 </div>
-
             </div>
+        @endif
         </div>
     </div>
 </div>

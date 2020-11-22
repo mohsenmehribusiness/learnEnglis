@@ -11,7 +11,6 @@
     @include('layouts.footer')
 </div>
 @include('layouts.script')
-<script src="{{ url('js/bootstrap.min.js') }}"></script>
 @yield('script')
 </body>
 </html>

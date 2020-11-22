@@ -6,6 +6,10 @@ class sentence extends Model
     protected $fillable=['word'];
     public $timestamps=false;
 
+    public function scopeFindSentence($query,$sentence){
+        return $query->whereWord($word);
+    }
+
     public function scopeStateCheck($query,$state){
         return $query->whereHas('Detail', function($query) use ($state) {$query->whereState($state)->where('usage','sentence');});
     }

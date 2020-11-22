@@ -21,6 +21,9 @@
             <a class="text-muted  nav-link" href="{{ route('sentence.index') }}">Sentences</a>
         </li>
         <li class="nav-item">
+            <a class="text-muted  nav-link" href="{{ route('qa.index') }}">Qa</a>
+        </li>
+        <li class="nav-item">
             <a class="text-muted  nav-link" href="{{ route('word.index') }}">Words</a>
         </li>
         <li class="nav-item">

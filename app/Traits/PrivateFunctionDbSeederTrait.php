@@ -47,6 +47,12 @@ trait PrivateFunctionDbSeederTrait
             $sentences.=$this->faker->sentence."-";
         return rtrim($sentences,"-");
     }
+    private function getRandomArraySentences(){
+        $sentences=array();
+        for($i=0;$i<$this->getRandomNumber(1,5);$i++)
+            array_push($sentences,$this->faker->sentence);
+        return $sentences;
+    }
     private function getRandomStringPersians(){
         $persians="";
         $usage=$this->usage;

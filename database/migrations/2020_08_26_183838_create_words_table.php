@@ -12,7 +12,6 @@ class CreateWordsTable extends Migration
             $table->string('word')->unique();
         });
     }
-
     public function down()
     {
         Schema::dropIfExists('words');

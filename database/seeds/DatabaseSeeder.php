@@ -5,6 +5,7 @@ use App\Traits\Insert\sentenceInsertTrait;
 use App\Traits\Insert\wordInsertTrait;
 use App\Traits\PrivateFunctionInsert;
 use App\Traits\PrivateFunctionDbSeederTrait;
+use App\Traits\Qa\QaInsertTrait;
 use App\Traits\test\functionsDatabaseSeederTrait;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public $faker;
     use wordInsertTrait;
     use lessonInsertTrait;
+    use QaInsertTrait;
     use sentenceInsertTrait;
     use functionsDatabaseSeederTrait;
     use PrivateFunctionInsert;
@@ -99,6 +101,30 @@ class DatabaseSeeder extends Seeder
             $this->saveSentence($inputs);
         }
     }
+
+    private function createInputsFakeForQa()
+    {
+        $inputs=[
+            'title'=>$this->faker->word,
+            'description'=>$this->faker->sentence,
+            'tags'=>$this->getRandomStringTags(),
+            'questions'=>$this->getRandomArraySentences(),
+            'answers'=>$this->getRandomArraySentences(),
+            'lesson'=>$this->getRandomArrayIdLessons()
+            ];
+        return $inputs;
+    }
+
+    public function createMultiQuestionAnswer($min,$max)
+    {
+        $this->usage='qa';
+        for($i=0;$i<$this->getRandomNumber($min,$max);$i++)
+        {
+            $inputs=$this->createInputsFakeForQa();
+            $this->saveQa($inputs);
+        }
+    }
+
     public function run(Faker $faker)
     {
       # factory(App\User::class, 15)->create();
@@ -106,5 +132,6 @@ class DatabaseSeeder extends Seeder
       $this->createMultiLesson(15,25);
       $this->createMultiWord(100,250);
       $this->createMultiSentence(100,250);
+      $this->createMultiQuestionAnswer(40,50);
     }
 }

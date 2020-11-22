@@ -33,11 +33,11 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ url('js/bootstrap-select.min.js') }}"></script>
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
-    <script>
+     <script>
         @error('lesson')
         $('#insert_lesson_modal').modal('show');
         @enderror
+        $('.my-select') .selectpicker({dropupAuto: false});
     </script>
 @endsection
 

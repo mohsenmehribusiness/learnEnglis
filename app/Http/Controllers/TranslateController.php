@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class TranslateController extends Controller
 {
     use Translate;
-
     public function index(){
         return view('translate.index');
     }

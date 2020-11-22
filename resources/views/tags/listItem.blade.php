@@ -1,6 +1,7 @@
 <div class="row">
-    <div class="col">
-        <a href='{{ route("$general.table.index") }}' class="float-right text-muted">in table</a>
+    <div class="col text-muted">
+        <a href='{{ route("$general.index") }}' class="float-right px-3"><i class="fa fa-table"></i></a>
+        <a href='{{ route("$general.letter") }}' class="float-right px-3"><i class="fa fa-envelope"></i></a>
     </div>
     {{--<div class="col">
         <ul class="nav nav-tabs text-center" id="myTab" role="tablist" style="justify-content: space-around;">

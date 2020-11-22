@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detail extends Model
 {
+    // usage = sentence|word|qa
     protected $fillable = ['state', 'star','repeat','usage','foreign_id'];
     protected $casts=['repeat'=>'integer'];
     public $timestamps=false;

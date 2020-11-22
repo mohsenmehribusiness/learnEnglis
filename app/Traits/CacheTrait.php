@@ -10,7 +10,7 @@ trait CacheTrait
      * @param $filter
      * @return bool
      */
-    public function setCacheQuery($nameFunction,$filter)
+    public function setCacheQuery($nameFunction,$filter=null)
     {
         return Cache::store('file')->put('query',['nameFunction'=>$nameFunction,'filter'=>$filter,'choose'=>$this->getChooseInCache()]); // 10 Minutes
     }

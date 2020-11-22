@@ -7,6 +7,3 @@
         </option>
     @endforeach
 </select>
-<script>
-    $('.my-select') .selectpicker({dropupAuto: false});
-</script>

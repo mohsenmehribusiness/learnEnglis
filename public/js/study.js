@@ -40,62 +40,6 @@ $(document).ready(function () {
         $('#labelTableBorder').toggleClass('bg-light');
         $('#studyTable').toggleClass('table-bordered');
     });
-    //table border
-    checkstate=function(id){
-        $.ajax(
-            {
-                url:"{{route('word.checkstate')}}",
-                method:"POSt",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data:{id:id},
-                dataType:"json",
-                success:function(data)
-                {
-                    //alert(data.state);
-                    let ico=$('#state_'+id);
-                    if(data.state){
-                        ico.removeClass('text-danger fa-times').addClass('text-success fa-check');
-                    }
-                    else if(!data.state)
-                    {
-                        ico.removeClass('text-success fa-check').addClass('text-danger fa-times');
-                    }
-                },
-                error:function () {
-                    alert("error");
-                }
-            });
-    };
-    getInformationWord=function(id){
-        $.ajax(
-            {
-                url:"{{ route('study.get.information.word') }}",
-                method:"POSt",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data:{id:id},
-                dataType:"json",
-                success:function(data)
-                {
-                    let english=data.word['english'];
-                    let persians=data.word['persians'];
-                    let sentences=data.word['sentence'];
-                    $('#english_text_modal').text(english);
-                    $('#persian_text_modal').text(null);
-                    for (i = 0; i < persians.length; i++){
-                        $('#persian_text_modal').append("<span class='text-muted'>"+persians[i]+"</span>");
-                    }
-
-                    $('#sentences_text_modal').text(null);
-                    for (i = 0; i < sentences.length; i++){
-                        $('#sentences_text_modal').append("<li class='text-muted'>"+sentences[i]+"</li>");
-                    }
-                }
-            });
-    };
     $('#thWord').click(function () {
         $('#iconWord').toggleClass('fa-align-center');
         $('#iconWord').toggleClass('fa-align-left');

@@ -27,4 +27,8 @@ class Lesson extends Model
     {
         return $this->belongsToMany(sentence::class);
     }
+    public function qas()
+    {
+        return $this->belongsToMany(Qa::class);
+    }
 }

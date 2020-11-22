@@ -10,17 +10,9 @@ class Tag extends Model
     public function scopeTagSentences($query){
         return $query->whereUsage('sentence');
     }
-
-    public function __destruct()
-    {
-        ///delete tag
-
-    }
-
     public function scopeFindTag($query,$tag){
         return $query->whereTag($tag)->first();
     }
-
     public function scopeTagWords($query){
         return $query->whereUsage('word');
     }
@@ -28,7 +20,6 @@ class Tag extends Model
     public function scopeTagStartLetter($query, $key){
         return $query->where('tag', 'like', $key.'%');
     }
-
 
     //Defining Relationships
     public function words()
@@ -42,5 +33,10 @@ class Tag extends Model
     public function sentences()
     {
         return $this->belongsToMany(sentence::class);
+    }
+
+    public function qas()
+    {
+        return $this->belongsToMany(Qa::class);
     }
 }

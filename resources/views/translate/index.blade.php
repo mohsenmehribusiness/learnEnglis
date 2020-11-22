@@ -34,7 +34,6 @@
 @endsection
 
 @section('script')
-<script src = "{{ url('js/jqueryAjax.min.js') }}"></script>
 <script>
     let source,target;
     source=$('#source').text();
@@ -57,6 +56,9 @@
                             {
                                 //console.log(data.translate);
                                 $('#translated').val(data.translate);
+                            },
+                            error:function () {
+                                alert('some thing error in ajax send');
                             }
                         });
                 }

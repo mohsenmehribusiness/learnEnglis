@@ -2,3 +2,22 @@
     padding : 0px;
     margin: 0px;
 }
+#buttonTr {
+    Position: fixed !important;
+    right:25px!important;
+    bottom:25px!important;
+    width: 70px;
+    height: 70px;
+    padding: 8px 14px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+textarea {
+    box-sizing:border-box;
+    border:0px !important;
+    min-height:200px;
+    resize: none;
+}
+

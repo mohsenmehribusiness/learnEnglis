@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
     @include('study.moreSetting')
     <table class="table" id="studyTable">
@@ -51,7 +50,6 @@
     </div>
     <!-- modal -->
 @endsection
-
 @section('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ url('css/study.css') }}">
@@ -59,7 +57,6 @@
     <link rel="stylesheet" href="{{ url('css/jquery.dataTables.min.css') }}">
     <!-- yajra datatable -->
 @endsection
-
 @section('script')
     <!-- get information word -->
     <script>
@@ -95,7 +92,6 @@
         };
     </script>
     <!-- get information word -->
-    <script src = "{{ url('js/jqueryAjax.min.js') }}"></script>
     <script src = "{{ url('js/study.js') }}"></script>
     <!-- yajra datatable -->
     <script src="{{ url('js/jquery.dataTables.min.js') }}"></script>

@@ -12,5 +12,7 @@
 </div>
 @include('layouts.script')
 @yield('script')
+@include('translate.translateModal')
+
 </body>
 </html>

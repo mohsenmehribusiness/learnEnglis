@@ -13,5 +13,5 @@
         text: 'Thumbnail'
     });
 </script>
-<script src="{{ url('js/toastr.min.js') }}"></script>
 <script src="{{ url('js/bootstrap.min.js') }}"></script>
+<script src = "{{ url('js/jqueryAjax.min.js') }}"></script>
